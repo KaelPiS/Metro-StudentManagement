@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\PiS Kael\Documents\GitHub\Metro-StudentManagement\StudentManagement\StudentManagement\obj\Debug\
+C:\Users\vu khac hoi\Documents\GitHub\Metro-StudentManagement\StudentManagement\StudentManagement\obj\Debug\
 StudentManagement
 none
 false
 DEBUG;TRACE
-C:\Users\PiS Kael\Documents\GitHub\Metro-StudentManagement\StudentManagement\StudentManagement\App.xaml
-8-1944522298
+C:\Users\vu khac hoi\Documents\GitHub\Metro-StudentManagement\StudentManagement\StudentManagement\App.xaml
+10-457145022
 4-702578097
-62-1839706855
-75752225650
-MainWindow.xaml;View\AcademicView.xaml;View\AccountSettingsView.xaml;View\AccountView.xaml;View\BehaviorView.xaml;View\DiplomaProjectView.xaml;View\IntroWindowView.xaml;View\MainMenu.xaml;
+64691219655
+751753585626
+MainWindow.xaml;View\AcademicView.xaml;View\AccountSettingsView.xaml;View\AccountView.xaml;View\BehaviorView.xaml;View\DiplomaProjectView.xaml;View\IntroWindowView.xaml;View\MainMenu.xaml;View\RegisterStudyUnitView.xaml;View\ScheduleView.xaml;
 
 False
 
