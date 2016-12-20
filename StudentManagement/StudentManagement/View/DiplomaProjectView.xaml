@@ -21,45 +21,70 @@
 
                 </Grid.Background>
             </Grid>
-            <GroupBox  Margin="50,50,50,20" DataContext="{Binding DiplomaProject}" >
+            <GroupBox  DataContext="{Binding DiplomaProject}" >
 
                 <GroupBox.Header>
                     <TextBlock FontSize="20"  FontWeight="Bold" FontFamily="Ubuntu" TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding ProjectName}" ></TextBlock>
                 </GroupBox.Header>
-                <Grid Background="White">
-                    <ScrollViewer>
-                        <StackPanel>
-                            <StackPanel  Orientation="Horizontal" >
-                                <TextBlock Margin="450,50,10,10" Text="Name : " FontSize="15" FontWeight="Bold"></TextBlock>
-                                <TextBlock Margin="10,50,3,5" Text="{Binding LastName}" ></TextBlock>
-                                <TextBlock Margin="10,50,3,5" Text="{Binding MiddleName}" ></TextBlock>
-                                <TextBlock Margin="10,50,3,5" Text="{Binding Name}" ></TextBlock>
+                <ScrollViewer>
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="Name : " FontSize="15" FontWeight="Bold"></TextBlock>
+                            <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock  Text="{Binding LastName}" ></TextBlock>
+                                <TextBlock  Text="{Binding MiddleName}" ></TextBlock>
+                                <TextBlock  Text="{Binding Name}" ></TextBlock>
                             </StackPanel>
-                            <StackPanel  Orientation="Horizontal" >
-                                <TextBlock Margin="450,5,10,10" Text="Student ID : " FontSize="15" FontWeight="Bold"></TextBlock>
-                                <TextBlock Margin="10,5,3,5" Text="{Binding StudentID}" ></TextBlock>
-                            </StackPanel>
-                            <StackPanel  Orientation="Horizontal" >
-                                <TextBlock Margin="450,5,10,10" Text="Kind Of Research : " FontSize="15" FontWeight="Bold"></TextBlock>
-                                <TextBlock Margin="10,5,3,5" Text="{Binding KindOfResearch}" ></TextBlock>
-                            </StackPanel>
-                            <StackPanel  Orientation="Horizontal" >
-                                <TextBlock Margin="450,5,10,10" Text="Instructor : " FontSize="15" FontWeight="Bold"></TextBlock>
-                                <TextBlock Margin="10,5,3,5" Text="{Binding Instructor}" ></TextBlock>
-                            </StackPanel>
-                            <StackPanel  Orientation="Horizontal" >
-                                <TextBlock Margin="450,5,10,10" Text="Result : " FontSize="15" FontWeight="Bold"></TextBlock>
-                                <TextBlock Margin="10,5,3,5" Text="{Binding Result}" ></TextBlock>
-                            </StackPanel>
-                            <GroupBox Margin="30">
-                                <GroupBox.Header>
-                                    <TextBlock Text="Content" FontSize="18" FontWeight="Bold"></TextBlock>
-                                </GroupBox.Header>
-                                <TextBlock TextWrapping="Wrap" FontFamily="consolas" FontSize="15" Text="{Binding Detail}"></TextBlock>
-                            </GroupBox>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
+
+
+                            <TextBlock  Grid.Column="1" Grid.Row="1" Text="Student ID : " FontSize="15" FontWeight="Bold"></TextBlock>
+                            <TextBlock  Grid.Column="2" Grid.Row="1" Text="{Binding StudentID}" ></TextBlock>
+
+
+                            <TextBlock Grid.Column="1" Grid.Row="2" Text="Kind Of Research : " FontSize="15" FontWeight="Bold"></TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding KindOfResearch}" ></TextBlock>
+
+
+                            <TextBlock Grid.Column="1" Grid.Row="3" Text="Instructor : " FontSize="15" FontWeight="Bold"></TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding Instructor}" ></TextBlock>
+
+
+                            <TextBlock Grid.Column="1" Grid.Row="4" Text="Result : " FontSize="15" FontWeight="Bold"></TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="4" Text="{Binding Result}" ></TextBlock>
+
+
+                        </Grid>
+
+
+
+
+                        <GroupBox Margin="30" Grid.Row="1">
+                            <GroupBox.Header>
+                                <TextBlock Text="Content" FontSize="18" FontWeight="Bold"></TextBlock>
+                            </GroupBox.Header>
+                            <TextBlock TextWrapping="Wrap" FontFamily="consolas" FontSize="15" Text="{Binding Detail}"></TextBlock>
+                        </GroupBox>
+
+
+                    </Grid>
+                </ScrollViewer>
             </GroupBox>
         </Grid>
     </ScrollViewer>

@@ -8,6 +8,9 @@
              xmlns:ViewModel="clr-namespace:StudentManagement.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ViewModel:MainMenuViewModel x:Key="key1"></ViewModel:MainMenuViewModel>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -47,8 +50,30 @@
                 </Metro:MetroAnimatedTabControl>
 
             </TabItem>
+            <TabItem Header="Register " DataContext="{StaticResource key1}"
+                     Metro:ControlsHelper.HeaderFontWeight="Bold"
+                     Metro:ControlsHelper.HeaderFontSize="35"
+                     FontFamily="Calibri"
+                   IsEnabled="{Binding IsDateRegister}"
+                     >
+                <Metro:MetroAnimatedTabControl>
+                    <TabItem Metro:ControlsHelper.HeaderFontSize="25" 
+                             Header="RegisterStudyUnit"
+                             FontFamily="Verdana">
+                        <local:RegisterStudyUnitView></local:RegisterStudyUnitView>
 
 
+                    </TabItem>
+                    <TabItem Metro:ControlsHelper.HeaderFontSize="25" 
+                             Header="Schedule"
+                             FontFamily="Verdana">
+                        <local:ScheduleView></local:ScheduleView>
+
+
+                    </TabItem>
+                </Metro:MetroAnimatedTabControl>
+
+            </TabItem>
 
         </Metro:MetroAnimatedSingleRowTabControl>
 
