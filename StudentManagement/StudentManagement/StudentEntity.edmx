@@ -202,6 +202,7 @@
           <Property Name="FinishDay" Type="smalldatetime" />
           <Property Name="Note" Type="nvarchar" MaxLength="300" />
           <Property Name="DateRegister" Type="smalldatetime" />
+          <Property Name="IsDateRegister" Type="bit" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -646,7 +647,8 @@
         <Function Name="GetUsersDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
         </Function>
-      
+        <Function Name="IsDateRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="IsDateRegisters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="StudentDBModelStoreContainer">
           <EntitySet Name="AcademicMark" EntityType="Self.AcademicMark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActivityGroup" EntityType="Self.ActivityGroup" Schema="dbo" store:Type="Tables" />
@@ -1017,6 +1019,7 @@
           <NavigationProperty Name="RegisterStudyUnit" Relationship="Self.Fk_SemesterID" FromRole="Semester" ToRole="RegisterStudyUnit" />
           <NavigationProperty Name="StudyFee" Relationship="Self.Fk_SemesterID_Study" FromRole="Semester" ToRole="StudyFee" />
           <Property Name="DateRegister" Type="DateTime" Precision="0" />
+          <Property Name="IsDateRegister" Type="Boolean" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -1617,7 +1620,11 @@
           <FunctionImport Name="GetUsersDetail" ReturnType="Collection(StudentDBModel.GetUsersDetail_Result)">
           <Parameter Name="StudentID" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="IsDateRegisters" />
+          <FunctionImport Name="IsDateRegisters" ReturnType="Collection(Boolean)" />
+          <FunctionImport Name="IsDateRegister" ReturnType="Collection(StudentDBModel.IsDateRegister_Result)" />
+        
+       
+        
         </EntityContainer>
         <ComplexType Name="GetAcademicByID_Result">
           <Property Type="String" Name="DisciplineID" Nullable="false" MaxLength="10" />
@@ -1729,6 +1736,10 @@
           <Property Type="String" Name="Passwords" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Roll" Nullable="true" />
           <Property Type="String" Name="ID" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="IsDateRegister_Result">
+          <Property Type="Boolean" Name="IsDateRegister" Nullable="true" />
+          <Property Type="String" Name="SemesterID" Nullable="false" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1939,6 +1950,7 @@
           <EntitySetMapping Name="Semester">
             <EntityTypeMapping TypeName="StudentDBModel.Semester">
               <MappingFragment StoreEntitySet="Semester">
+                <ScalarProperty Name="IsDateRegister" ColumnName="IsDateRegister" />
                 <ScalarProperty Name="DateRegister" ColumnName="DateRegister" />
                 <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
                 <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
@@ -2190,7 +2202,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-         
+          <FunctionImportMapping FunctionImportName="IsDateRegisters" FunctionName="StudentDBModel.Store.IsDateRegisters" />
+          <FunctionImportMapping FunctionImportName="IsDateRegister" FunctionName="StudentDBModel.Store.IsDateRegister">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentDBModel.IsDateRegister_Result">
+                <ScalarProperty Name="IsDateRegister" ColumnName="IsDateRegister" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          
+        
+        
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -230,6 +230,7 @@
     <NavigationProperty Name="RegisterStudyUnit" Relationship="Self.Fk_SemesterID" FromRole="Semester" ToRole="RegisterStudyUnit" />
     <NavigationProperty Name="StudyFee" Relationship="Self.Fk_SemesterID_Study" FromRole="Semester" ToRole="StudyFee" />
     <Property Name="DateRegister" Type="DateTime" Precision="0" />
+    <Property Name="IsDateRegister" Type="Boolean" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -830,7 +831,8 @@
     <FunctionImport Name="GetUsersDetail" ReturnType="Collection(StudentDBModel.GetUsersDetail_Result)">
       <Parameter Name="StudentID" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="IsDateRegisters" />
+    <FunctionImport Name="IsDateRegisters" ReturnType="Collection(Boolean)" />
+    <FunctionImport Name="IsDateRegister" ReturnType="Collection(StudentDBModel.IsDateRegister_Result)" />
   </EntityContainer>
   <ComplexType Name="GetAcademicByID_Result">
     <Property Type="String" Name="DisciplineID" Nullable="false" MaxLength="10" />
@@ -942,5 +944,9 @@
     <Property Type="String" Name="Passwords" Nullable="true" MaxLength="30" />
     <Property Type="Int32" Name="Roll" Nullable="true" />
     <Property Type="String" Name="ID" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="IsDateRegister_Result">
+    <Property Type="Boolean" Name="IsDateRegister" Nullable="true" />
+    <Property Type="String" Name="SemesterID" Nullable="false" MaxLength="10" />
   </ComplexType>
 </Schema>

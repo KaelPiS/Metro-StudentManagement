@@ -168,6 +168,9 @@
     <Compile Include="GetUser_Result.cs">
       <DependentUpon>StudentEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="IsDateRegister_Result.cs">
+      <DependentUpon>StudentEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Parents.cs">
       <DependentUpon>StudentEntity.tt</DependentUpon>
     </Compile>
@@ -236,6 +239,7 @@
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PasswordHelper.cs" />
+    <Compile Include="ViewModel\RegisterStudyUnitViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

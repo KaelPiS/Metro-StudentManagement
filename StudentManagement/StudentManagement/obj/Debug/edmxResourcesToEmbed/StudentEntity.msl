@@ -204,6 +204,7 @@
     <EntitySetMapping Name="Semester">
       <EntityTypeMapping TypeName="StudentDBModel.Semester">
         <MappingFragment StoreEntitySet="Semester">
+          <ScalarProperty Name="IsDateRegister" ColumnName="IsDateRegister" />
           <ScalarProperty Name="DateRegister" ColumnName="DateRegister" />
           <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
           <ScalarProperty Name="SemesterName" ColumnName="SemesterName" />
@@ -452,6 +453,15 @@
           <ScalarProperty Name="Passwords" ColumnName="Passwords" />
           <ScalarProperty Name="Roll" ColumnName="Roll" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="IsDateRegisters" FunctionName="StudentDBModel.Store.IsDateRegisters" />
+    <FunctionImportMapping FunctionImportName="IsDateRegister" FunctionName="StudentDBModel.Store.IsDateRegister">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="StudentDBModel.IsDateRegister_Result">
+          <ScalarProperty Name="IsDateRegister" ColumnName="IsDateRegister" />
+          <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

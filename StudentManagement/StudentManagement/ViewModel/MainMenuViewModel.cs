@@ -30,11 +30,11 @@ namespace StudentManagement.ViewModel
 
         public MainMenuViewModel()
         {
-
-            //if (ST.IsDateRegisters() == -1)
-            //    IsDateRegister = true;
-            //else
-            //    IsDateRegister = false;
+            var a = ST.IsDateRegister().ToList();
+            if (a[0].IsDateRegister==true)
+                IsDateRegister = true;
+            else
+                IsDateRegister = false;
 
         }
     }
