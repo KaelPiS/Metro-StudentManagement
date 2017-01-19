@@ -155,26 +155,26 @@
                                 <Grid.Resources>
                                     <ViewModel:ParameterConverter x:Key="ParaConverter"></ViewModel:ParameterConverter>
                                 </Grid.Resources>
-                           
-                            <Button 
+
+                                <Button 
                                             Content="Register" 
                                             FontWeight="Bold" 
                                             
                                             FontSize="15"  Margin="50,15,30,70" HorizontalAlignment="Right"  VerticalAlignment="Top"
                                             FontFamily="Expanded">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="Click">
-                                        <i:InvokeCommandAction Command="{Binding InsertRegisterFromListDisciplineCommand}">
-                                            <i:InvokeCommandAction.CommandParameter>
-                                                <MultiBinding Converter="{StaticResource ParaConverter}">
-                                                    <Binding ElementName="DtgListDiscipline"/>
-                                                    <Binding ElementName="StpError"/>
-                                                </MultiBinding>
-                                            </i:InvokeCommandAction.CommandParameter>
-                                        </i:InvokeCommandAction>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Button>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding InsertRegisterFromListDisciplineCommand}">
+                                                <i:InvokeCommandAction.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource ParaConverter}">
+                                                        <Binding ElementName="DtgListDiscipline"/>
+                                                        <Binding ElementName="StpError"/>
+                                                    </MultiBinding>
+                                                </i:InvokeCommandAction.CommandParameter>
+                                            </i:InvokeCommandAction>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
                             </Grid>
                         </StackPanel>
                     </GroupBox>

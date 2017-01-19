@@ -22,6 +22,20 @@
                 </ImageBrush>
 
             </Grid.Background>
+            <GroupBox Margin="30" Header="{Binding }">
+                <DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Lesson"></DataGridTextColumn>
+                        <DataGridTemplateColumn Header=" Mondat">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
         </Grid>
 
     </Grid>
