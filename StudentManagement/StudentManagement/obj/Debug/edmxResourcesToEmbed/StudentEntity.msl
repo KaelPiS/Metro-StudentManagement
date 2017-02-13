@@ -663,5 +663,14 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetDateRegisterUnit" FunctionName="StudentDBModel.Store.GetDateRegisterUnit">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="StudentDBModel.GetDateRegisterUnit_Result">
+          <ScalarProperty Name="Hour" ColumnName="Hour" />
+          <ScalarProperty Name="Minute" ColumnName="Minute" />
+          <ScalarProperty Name="Second" ColumnName="Second" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

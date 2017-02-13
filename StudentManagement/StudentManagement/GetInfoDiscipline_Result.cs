@@ -13,14 +13,14 @@ namespace StudentManagement
     
     public partial class GetInfoDiscipline_Result
     {
-        public virtual Nullable<bool> check { get; set; }
-        public virtual string DisciplineID { get; set; }
-        public virtual string DepartmentName { get; set; }
-        public virtual Nullable<int> Credits { get; set; }
-        public virtual string StudyDate { get; set; }
-        public virtual Nullable<int> Period { get; set; }
-        public virtual Nullable<System.DateTime> FinishDay { get; set; }
-        public virtual Nullable<System.DateTime> StartDay { get; set; }
-        public virtual string Name { get; set; }
+        public Nullable<bool> check { get; set; }
+        public string DisciplineID { get; set; }
+        public string DepartmentName { get; set; }
+        public Nullable<int> Credits { get; set; }
+        public string StudyDate { get; set; }
+        public Nullable<int> Period { get; set; }
+        public Nullable<System.DateTime> FinishDay { get; set; }
+        public Nullable<System.DateTime> StartDay { get; set; }
+        public string Name { get; set; }
     }
 }

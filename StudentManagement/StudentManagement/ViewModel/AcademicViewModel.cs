@@ -13,7 +13,7 @@ namespace StudentManagement.ViewModel
     {
 
         StudentDBEntities ST = new StudentDBEntities();
-
+        private string selectedSubjectID = string.Empty;
         #region DetailCommand, which shows Detail about a Dicipline
         //This hold all the detail about a Discipline
         private ObservableCollection<GetDetailDisciplineByID_Result> _SubjectDetail;
@@ -35,27 +35,33 @@ namespace StudentManagement.ViewModel
                 }
             }
         }
-        public ICommand DetailCommand { get; set; }
-        private string selectedSubjectID = string.Empty;
 
-        private void InitDetailCommand()
+        private void OnDetailCommand(DataGrid currentDataGrid)
         {
-            DetailCommand = new RelayCommand<DataGrid>((p) => true, (p) =>
+            try
             {
-                try
-                {
-                    GetAcademicByID_Result data = (GetAcademicByID_Result)p.SelectedItem;
-                    selectedSubjectID = data.DisciplineID;
-                    SubjectDetail = new ObservableCollection<GetDetailDisciplineByID_Result>(ST.GetDetailDisciplineByID(selectedSubjectID).ToList());
-                }
-                catch
-                {
-                    return;
-                }
-
-            });
+                GetAcademicByID_Result data = (GetAcademicByID_Result)currentDataGrid.SelectedItem;
+                selectedSubjectID = data.DisciplineID;
+                SubjectDetail = new ObservableCollection<GetDetailDisciplineByID_Result>(ST.GetDetailDisciplineByID(selectedSubjectID).ToList());
+            }
+            catch
+            {
+                return;
+            }
         }
 
+        private ICommand _DetailCommand;
+        public ICommand DetailCommand
+        {
+            get
+            {
+                if (_DetailCommand == null)
+                {
+                    _DetailCommand = new RelayCommand<DataGrid>((p) => true, OnDetailCommand);
+                }
+                return _DetailCommand;
+            }
+        }
         #endregion
 
         #region AcademicList, which shows Student's Mark
@@ -89,6 +95,8 @@ namespace StudentManagement.ViewModel
 
         #endregion
 
+
+
         private double averageSum = 0f;
 
 
@@ -108,16 +116,13 @@ namespace StudentManagement.ViewModel
             }
         }
 
+
+
         private void calAvarageSum()
         {
 
         }
 
-        public AcademicViewModel()
-        {
-            InitDetailCommand();
-       
-        }
     }
 }
 

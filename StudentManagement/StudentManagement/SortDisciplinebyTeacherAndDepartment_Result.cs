@@ -11,17 +11,16 @@ namespace StudentManagement
 {
     using System;
     
-    public partial class SortDisciplinebyTeacherAndDepartment_Result : GetInfoDiscipline_Result
+    public partial class SortDisciplinebyTeacherAndDepartment_Result
     {
-        public override Nullable<bool> check { get; set; }
-        public override string DisciplineID { get; set; }
-        public override string DepartmentName { get; set; }
-        public override Nullable<int> Credits { get; set; }
-        public override string StudyDate { get; set; }
-        public override Nullable<int> Period { get; set; }
-        public override Nullable<System.DateTime> FinishDay { get; set; }
-        public override Nullable<System.DateTime> StartDay { get; set; }
-        public override string Name { get; set; }
-
+        public Nullable<bool> check { get; set; }
+        public string DisciplineID { get; set; }
+        public string DepartmentName { get; set; }
+        public Nullable<int> Credits { get; set; }
+        public string StudyDate { get; set; }
+        public Nullable<int> Period { get; set; }
+        public Nullable<System.DateTime> FinishDay { get; set; }
+        public Nullable<System.DateTime> StartDay { get; set; }
+        public string Name { get; set; }
     }
 }

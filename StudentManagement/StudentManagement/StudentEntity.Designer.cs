@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\vu khac hoi\Documents\GitHub\Metro-StudentManagement\StudentManagement\StudentManagement\StudentEntity.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Vu Khac Hoi\Documents\GitHub\Metro-StudentManagement\StudentManagement\StudentManagement\StudentEntity.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

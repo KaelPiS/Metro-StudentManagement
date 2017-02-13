@@ -13,7 +13,7 @@
         <ViewModel:RegisterStudyUnitViewModel x:Key="Key_RegisterStudyUnit">
 
         </ViewModel:RegisterStudyUnitViewModel>
-
+        <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
     </UserControl.Resources>
     <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid>
@@ -224,6 +224,50 @@
                                     </i:Interaction.Triggers>
                                 </Button>
                             </Grid>
+                            <StackPanel  Visibility="{Binding IsOpenTimeRegisterUnit, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}"  Panel.ZIndex="10" HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" Orientation="Horizontal" DataContext="{StaticResource Key_RegisterStudyUnit}">
+                                <Metro:TransitioningContentControl 
+                                                 
+                                                  Panel.ZIndex="5"
+                                                  Height="100"                                                  
+                                                  Margin="100 10 0 0"
+                                                  FontSize="100"
+                                                  Transition="Down" 
+                                                   Content="{Binding RegisterCloseHour}"
+                                                   FontFamily="Consolas"
+                                                   Foreground="Gray" 
+                                                   Background="WhiteSmoke"/>
+                                <TextBlock Text=":"  Panel.ZIndex="5"  FontSize="100" FontFamily="Consolas"
+                                                   Foreground="Gray" Margin="50 10 0 10"
+                                                  Height="100" ></TextBlock>
+                                <Metro:TransitioningContentControl 
+                                              
+                                                  Panel.ZIndex="5"
+                                                  Height="100"                                                  
+                                                  Margin="50 10 0 0"
+                                                  FontSize="100"
+                                                  Transition="Down" 
+                                                   Content="{Binding RegisterCloseMinute}"
+                                                   FontFamily="Consolas"
+                                                   Foreground="Gray" 
+                                                   Background="WhiteSmoke"/>
+                                <TextBlock Text=":"  Panel.ZIndex="5"  FontSize="100" FontFamily="Consolas"
+                                                   Foreground="Gray" Margin="50 10 0 10"
+                                                  Height="100" ></TextBlock>
+                                <Metro:TransitioningContentControl 
+                                              
+                                                  Panel.ZIndex="5"
+                                                  Height="100"                                                  
+                                                  Margin="50 10 0 0"
+                                                  FontSize="100"
+                                                  Transition="Down" 
+                                                   Content="{Binding RegisterCloseSecond}"
+                                                   FontFamily="Consolas"
+                                                   Foreground="Gray" 
+                                                   Background="WhiteSmoke"/>
+
+                            </StackPanel>
+                           
                         </StackPanel>
                     </GroupBox>
 

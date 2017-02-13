@@ -30,20 +30,24 @@ namespace StudentManagement.ViewModel
                 OnPropertyChanged("UniversityInfo");
             }
         }
+        private ICommand _IntroUnloadCommand;
+        public ICommand IntroUnloadCommand
+        {
+            get
+            {
+                if (_IntroUnloadCommand==null)
+                    _IntroUnloadCommand = new RelayCommand<MediaElement>((p) => true, OnIntroUnloadCommand);
+                return _IntroUnloadCommand;
+            }
 
-
-        public ICommand IntroUnloadCommand { get; set; }
-
-
+           
+        }
 
         private void OnIntroUnloadCommand(MediaElement currentMediaEle)
         { 
             currentMediaEle.Position = new TimeSpan(0, 0, 1);
             currentMediaEle.Play();
         }
-        public UniversityInfoViewModel()
-        {
-            IntroUnloadCommand = new RelayCommand<MediaElement>((p) => true, OnIntroUnloadCommand);
-        }
+   
     }
 }

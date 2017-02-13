@@ -66,7 +66,7 @@
 
             </StackPanel>
             <GroupBox DataContext="{StaticResource key1}" Margin="30,-5,30,20"  Header="{Binding }" Grid.Row="1">
-                <Grid >
+                <Grid Background="Transparent"  >
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -77,7 +77,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                   
+
 
                     <Grid Background="White" Grid.Column="0">
                         <Grid.RowDefinitions>
@@ -136,8 +136,8 @@
                         <Border Grid.Row="0" BorderThickness="2" BorderBrush="Black">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Monday"></TextBlock>
                         </Border>
-                        <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Monday}">
+                        <Border  Grid.Row="1" BorderThickness="2" BorderBrush="Black">
+                            <DataGrid VerticalScrollBarVisibility="Hidden" VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Monday}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
@@ -155,11 +155,11 @@
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                             </Grid.RowDefinitions>
                                                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Text="{Binding DepartmentID}"></TextBlock>
-                                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Text="{Binding DepartmentName}"></TextBlock>
-                                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Text="{Binding TeacherName}"></TextBlock>
-                                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Text="{Binding Room}"></TextBlock>
-                                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Text="{Binding StartDay}"></TextBlock>
-                                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Text="{Binding FinishDay}"></TextBlock>
+                                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Text="{Binding DepartmentName}"></TextBlock>
+                                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Text="{Binding TeacherName}"></TextBlock>
+                                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Text="{Binding Room}"></TextBlock>
+                                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Text="{Binding StartDay}"></TextBlock>
+                                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Text="{Binding FinishDay}"></TextBlock>
                                                         </Grid>
                                                     </Border>
                                                 </Grid>
@@ -179,7 +179,7 @@
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Tuesday"></TextBlock>
                         </Border>
                         <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Tuesday}">
+                            <DataGrid VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Tuesday}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
@@ -221,7 +221,7 @@
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Wednesday"></TextBlock>
                         </Border>
                         <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Wednesday}">
+                            <DataGrid VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Wednesday}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
@@ -263,7 +263,7 @@
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Thursday"></TextBlock>
                         </Border>
                         <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Thursday}">
+                            <DataGrid VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Thursday}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
@@ -305,7 +305,7 @@
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Friday"></TextBlock>
                         </Border>
                         <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Friday}">
+                            <DataGrid VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Friday}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
@@ -338,24 +338,24 @@
                             </DataGrid>
                         </Border>
                     </Grid>
-                    <Grid Grid.Column="6">
+                    <Grid  Grid.Column="6">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="10*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" BorderThickness="2" BorderBrush="Black">
+                        <Border  Grid.Row="0" BorderThickness="2" BorderBrush="Black">
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Saturday"></TextBlock>
                         </Border>
-                        <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Saturday}">
-                                <DataGrid.Columns>
+                        <Border   Grid.Row="1" BorderThickness="2" BorderBrush="Black">
+                            <DataGrid  VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Saturday}">
+                                <DataGrid.Columns  >
                                     <DataGridTemplateColumn >
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Grid  Width="193"   Height="{Binding Credits}">
+                                        <DataGridTemplateColumn.CellTemplate >
+                                            <DataTemplate >
+                                                <Grid  Background="Transparent"  Width="193"   Height="{Binding Credits}">
 
                                                     <Border   BorderBrush="Black" BorderThickness="2">
-                                                        <Grid   >
+                                                        <Grid Background="Transparent"  >
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition Height="*"></RowDefinition>
                                                                 <RowDefinition Height="*"></RowDefinition>
@@ -381,7 +381,7 @@
                         </Border>
                     </Grid>
                 </Grid>
-                
+
             </GroupBox>
         </Grid>
 

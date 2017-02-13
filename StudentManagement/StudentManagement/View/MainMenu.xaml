@@ -10,7 +10,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <ViewModel:MainMenuViewModel x:Key="MainMenuViewModel"></ViewModel:MainMenuViewModel>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"></BooleanToVisibilityConverter>
     </UserControl.Resources>
+
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,8 +34,8 @@
                     <local:MainAnouncementView></local:MainAnouncementView>
                 </Metro:MetroAnimatedTabControl>
             </TabItem>
-            
-            
+
+
             <TabItem Header="Profile"
                      Metro:ControlsHelper.HeaderFontWeight="Bold"
                      Metro:ControlsHelper.HeaderFontSize="35"
@@ -42,30 +45,75 @@
                 </Metro:MetroAnimatedTabControl>
             </TabItem>
 
-       
+
 
             <TabItem Header="Register " DataContext="{Binding IsDateRegister}"
                      Metro:ControlsHelper.HeaderFontWeight="Bold"
                      Metro:ControlsHelper.HeaderFontSize="35"
                      FontFamily="Calibri"
                      IsEnabled="{Binding IsDateRegister}">
-                <Metro:MetroAnimatedTabControl>
-                    <TabItem Metro:ControlsHelper.HeaderFontSize="25" 
+                <Grid>
+                    <StackPanel  Visibility="{Binding IsOpenTimeRegisterUnit, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}"  Panel.ZIndex="10" HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" Orientation="Horizontal" DataContext="{StaticResource MainMenuViewModel}">
+                        <Metro:TransitioningContentControl 
+                                                 
+                                                  Panel.ZIndex="5"
+                                                  Height="100"                                                  
+                                                  Margin="100 10 0 0"
+                                                  FontSize="100"
+                                                  Transition="Down" 
+                                                   Content="{Binding RegisterOpenHour}"
+                                                   FontFamily="Consolas"
+                                                   Foreground="Gray" 
+                                                   Background="WhiteSmoke"/>
+                        <TextBlock Text=":"  Panel.ZIndex="5"  FontSize="100" FontFamily="Consolas"
+                                                   Foreground="Gray" Margin="50 10 0 10"
+                                                  Height="100" ></TextBlock>
+                        <Metro:TransitioningContentControl 
+                                              
+                                                  Panel.ZIndex="5"
+                                                  Height="100"                                                  
+                                                  Margin="50 10 0 0"
+                                                  FontSize="100"
+                                                  Transition="Down" 
+                                                   Content="{Binding RegisterOpenMinute}"
+                                                   FontFamily="Consolas"
+                                                   Foreground="Gray" 
+                                                   Background="WhiteSmoke"/>
+                        <TextBlock Text=":"  Panel.ZIndex="5"  FontSize="100" FontFamily="Consolas"
+                                                   Foreground="Gray" Margin="50 10 0 10"
+                                                  Height="100" ></TextBlock>
+                        <Metro:TransitioningContentControl 
+                                              
+                                                  Panel.ZIndex="5"
+                                                  Height="100"                                                  
+                                                  Margin="50 10 0 0"
+                                                  FontSize="100"
+                                                  Transition="Down" 
+                                                   Content="{Binding RegisterOpenSecond}"
+                                                   FontFamily="Consolas"
+                                                   Foreground="Gray" 
+                                                   Background="WhiteSmoke"/>
+
+                    </StackPanel>
+                    <Metro:MetroAnimatedTabControl DataContext="{StaticResource MainMenuViewModel}" IsEnabled="{Binding IsOpenRegisterUnit}" >
+                        <TabItem Metro:ControlsHelper.HeaderFontSize="25" 
                              Header="RegisterStudyUnit"
                              FontFamily="Verdana">
-                        <local:RegisterStudyUnitView></local:RegisterStudyUnitView>
+
+                            <local:RegisterStudyUnitView></local:RegisterStudyUnitView>
 
 
-                    </TabItem>
-                    <TabItem Metro:ControlsHelper.HeaderFontSize="25" 
+                        </TabItem>
+                        <TabItem Metro:ControlsHelper.HeaderFontSize="25" 
                              Header="Schedule"
                              FontFamily="Verdana">
-                        <local:ScheduleView></local:ScheduleView>
+                            <local:ScheduleView></local:ScheduleView>
 
 
-                    </TabItem>
-                </Metro:MetroAnimatedTabControl>
-
+                        </TabItem>
+                    </Metro:MetroAnimatedTabControl>
+                </Grid>
             </TabItem>
 
             <TabItem Header="Mark " 
@@ -100,4 +148,5 @@
         </Metro:MetroAnimatedSingleRowTabControl>
 
     </Grid>
+
 </UserControl>

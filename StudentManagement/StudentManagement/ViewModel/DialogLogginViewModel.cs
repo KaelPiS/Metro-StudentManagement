@@ -25,19 +25,29 @@ namespace StudentManagement.ViewModel
                 _Users = value;
             }
         }
+
         #endregion
 
         public static bool isLoggedIn = false;
-        MetroWindow metroWindow = (Application.Current.MainWindow as MetroWindow); 
+        MetroWindow metroWindow = (Application.Current.MainWindow as MetroWindow);
 
         #region LoginCommand, which displays the login form and do some stuffs 
-        public ICommand LoginCommand { get; set; }
-        
-        private void OnLoginCommand()
+        private ICommand _LoginCommand;
+
+
+        public ICommand LoginCommand
         {
-            LoginCommand = new RelayCommand<MetroWindow>((p) => true, ShowLoginDialogWithRememberCheckBox);
+            get
+            {
+                if (_LoginCommand == null) 
+                    _LoginCommand = new RelayCommand<MetroWindow>((p) => true, ShowLoginDialogWithRememberCheckBox);
+                return _LoginCommand;
+            }
+
+         
         }
 
+   
         #endregion
 
         #region LogginDialog with Remember Check Box
@@ -88,10 +98,7 @@ namespace StudentManagement.ViewModel
         }
         #endregion
 
-        public DialogLogginViewModel()
-        {
-            OnLoginCommand();
-        }
+  
 
     }
 }

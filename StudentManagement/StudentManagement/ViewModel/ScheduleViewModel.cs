@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
-    class ScheduleViewModel:ViewModelBase
+    class ScheduleViewModel : ViewModelBase
     {
         StudentDBEntities ST = new StudentDBEntities();
         SpeechSynthesizer warningAudio = new SpeechSynthesizer();
@@ -88,32 +88,35 @@ namespace StudentManagement.ViewModel
             }
         }
 
-         void AddEmpty(ObservableCollection<GetScheduleForDetail1_Result>Day)
+        void AddEmpty(ObservableCollection<GetScheduleForDetail1_Result> Day)
         {
             foreach (int Child in Period)
             {
-                int i = 0;
+                int Credits = 0;
                 foreach (GetScheduleForDetail1_Result Schedule in Day)
                 {
                     if (Child == Schedule.Period)
                     {
-                        i = 1;
+                        Credits = 1;
                         break;
                     }
                 }
 
-                if (i == 0)
+                if (Credits == 0)
                 {
                     for (int Schedule = 0; Schedule < Day.Count; Schedule++)
                     {
                         if (Child + 1 == Day[Schedule].Period)
                         {
-                            i = int.Parse(Day[Schedule].Credits.ToString()); break;
+                            Credits = int.Parse(Day[Schedule].Credits.ToString()); break;
                         }
-                        if (Child == 4 && Child - 1 == Day[Schedule].Period) { i = int.Parse(Day[Schedule].Credits.ToString()); break; }
+                        if (Child == 4 && Child - 1 == Day[Schedule].Period && Day[Day.Count - 1].DepartmentID != null) { Credits = int.Parse(Day[Schedule].Credits.ToString()); break; }
                     }
-                    GetScheduleForDetail1_Result IconEmpty = new GetScheduleForDetail1_Result() { Period = Child - 1, Credits = (5 * 43 - i) };
-                    Day.Insert(int.Parse(IconEmpty.Period.ToString()), IconEmpty);
+                    if (Credits != 0)
+                    {
+                        GetScheduleForDetail1_Result IconEmpty = new GetScheduleForDetail1_Result() { Period = Child - 1, Credits = (5 * 43 - Credits) };
+                        Day.Insert(int.Parse(IconEmpty.Period.ToString()), IconEmpty);
+                    }
                 }
             }
         }
@@ -192,6 +195,6 @@ namespace StudentManagement.ViewModel
             }
         }
 
-     
+
     }
 }
