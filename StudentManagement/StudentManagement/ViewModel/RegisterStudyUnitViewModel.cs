@@ -483,7 +483,7 @@ namespace StudentManagement.ViewModel
                 if (_hour == 0 && _minute == 0 && _second == 0)
                 {
                     _timer.Stop();
-                    MainMenuViewModel.CloseTimeRegisterUnit = false;
+                    UpdateCloseTimeRegister.BroadCast(false);            
                     IsCloseTimeRegister = false;
                 }
                 UpdateTime();

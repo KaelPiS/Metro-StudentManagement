@@ -25,7 +25,7 @@
                 </Grid.Background>
 
 
-                <StackPanel >
+                <StackPanel DataContext="{StaticResource Key_RegisterStudyUnit}" IsEnabled="{Binding IsCloseTimeRegister}" >
                     <GroupBox DataContext="{StaticResource Key_RegisterStudyUnit}">
                         <GroupBox.Header>
                             <TextBlock Text="{Binding Header }" FontWeight="Black" FontSize="20" TextAlignment="Center" HorizontalAlignment="Center"></TextBlock>

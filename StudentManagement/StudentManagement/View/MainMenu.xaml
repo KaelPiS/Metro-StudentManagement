@@ -47,11 +47,11 @@
 
 
 
-            <TabItem Header="Register " DataContext="{Binding IsDateRegister}"
+            <TabItem Header="Register " 
                      Metro:ControlsHelper.HeaderFontWeight="Bold"
                      Metro:ControlsHelper.HeaderFontSize="35"
                      FontFamily="Calibri"
-                     IsEnabled="{Binding IsDateRegister}">
+                     IsEnabled="{Binding CheckDateRegister}">
                 <Grid>
                     <StackPanel  Visibility="{Binding IsOpenTimeRegisterUnit, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}"  Panel.ZIndex="10" HorizontalAlignment="Center"
                                                    VerticalAlignment="Center" Orientation="Horizontal" DataContext="{StaticResource MainMenuViewModel}">

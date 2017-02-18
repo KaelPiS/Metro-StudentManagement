@@ -295,6 +295,7 @@
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ScheduleViewModel.cs" />
     <Compile Include="ViewModel\UniversityInfoViewModel.cs" />
+    <Compile Include="ViewModel\UpdateCloseTimeRegister.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AcademicView.xaml.cs">
