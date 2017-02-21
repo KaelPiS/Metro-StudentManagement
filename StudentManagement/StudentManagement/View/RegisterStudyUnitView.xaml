@@ -38,9 +38,11 @@
                                     <TextBlock Text="Registered"></TextBlock>
                                 </Expander.Header>
                                 <StackPanel>
-                                    <DataGrid  Name="DtgRegistered" CanUserAddRows="false" AutoGenerateColumns="False"    MaxHeight="300" ItemsSource="{Binding ListRegistered}">
+                                    <DataGrid  SelectionUnit="FullRow"  Name="DtgRegistered" CanUserAddRows="false" AutoGenerateColumns="False"    MaxHeight="300" ItemsSource="{Binding ListRegistered}">
                                         <DataGrid.Columns>
-                                            <DataGridCheckBoxColumn Header="Check" Binding="{Binding check, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></DataGridCheckBoxColumn>
+                                            <DataGridCheckBoxColumn  
+                                        EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        ElementStyle="{DynamicResource MetroDataGridCheckBox}" Header="Check" Binding="{Binding check, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></DataGridCheckBoxColumn>
                                             <DataGridTextColumn Width="150" Header="Discipline" IsReadOnly="True" Binding="{Binding DisciplineID}"></DataGridTextColumn>
                                             <DataGridTextColumn Width="200" Header="Department Name" IsReadOnly="True" Binding="{Binding DepartmentName}"></DataGridTextColumn>
                                             <DataGridTextColumn Width="100" Header="Study date" IsReadOnly="True" Binding="{Binding StudyDate}"></DataGridTextColumn>

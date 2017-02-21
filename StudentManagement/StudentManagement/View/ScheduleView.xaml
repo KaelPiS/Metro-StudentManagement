@@ -142,7 +142,7 @@
                         </Border>
                         <Border  HorizontalAlignment="Stretch"  Grid.Row="1" BorderThickness="2" BorderBrush="Black">
                             <DataGrid VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Monday}">
-                                
+
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
@@ -226,12 +226,12 @@
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Wednesday"></TextBlock>
                         </Border>
                         <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Wednesday}">
+                            <DataGrid  VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Wednesday}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Grid  Width="{ Binding Width }"   Height="{Binding Credits}">
+                                                <Grid   Width="{ Binding Width }"   Height="{Binding Credits}">
 
                                                     <Border   BorderBrush="Black" BorderThickness="2">
                                                         <Grid   >
@@ -385,7 +385,6 @@
                         </Border>
                     </Grid>
                 </Grid>
-
             </GroupBox>
         </Grid>
 
