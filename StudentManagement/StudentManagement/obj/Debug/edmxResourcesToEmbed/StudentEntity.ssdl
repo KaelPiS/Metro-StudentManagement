@@ -36,6 +36,7 @@
     <Property Name="RegisteredParticipation" Type="int" />
     <Property Name="ActivityGroupID" Type="nvarchar" MaxLength="10" />
     <Property Name="Organization" Type="nvarchar" MaxLength="100" />
+    <Property Name="SemesterID" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Candre">
     <Key>
@@ -661,6 +662,8 @@
   <Function Name="Get10NewestGeneralAnouncements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="GetAcademicByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Module" Type="nvarchar" Mode="In" />
+    <Parameter Name="Year" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="GetActivities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Activities" Type="nvarchar" Mode="In" />

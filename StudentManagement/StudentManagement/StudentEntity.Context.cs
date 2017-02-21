@@ -56,15 +56,6 @@ namespace StudentManagement
         public virtual DbSet<DisciplineAnouncement> DisciplineAnouncement { get; set; }
         public virtual DbSet<UniversityInfo> UniversityInfo { get; set; }
     
-        public virtual ObjectResult<GetAcademicByID_Result> GetAcademicByID(string studentID)
-        {
-            var studentIDParameter = studentID != null ?
-                new ObjectParameter("StudentID", studentID) :
-                new ObjectParameter("StudentID", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAcademicByID_Result>("GetAcademicByID", studentIDParameter);
-        }
-    
         public virtual ObjectResult<GetActivities_Result> GetActivities(string activities)
         {
             var activitiesParameter = activities != null ?
@@ -476,6 +467,23 @@ namespace StudentManagement
                 new ObjectParameter("Width", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetScheduleForDetail1_Result>("GetScheduleForDetail1", studentIDParameter, semesterParameter, studyDateParameter, heightParameter, widthParameter);
+        }
+    
+        public virtual ObjectResult<GetAcademicByID_Result> GetAcademicByID(string studentID, string module, string year)
+        {
+            var studentIDParameter = studentID != null ?
+                new ObjectParameter("StudentID", studentID) :
+                new ObjectParameter("StudentID", typeof(string));
+    
+            var moduleParameter = module != null ?
+                new ObjectParameter("Module", module) :
+                new ObjectParameter("Module", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAcademicByID_Result>("GetAcademicByID", studentIDParameter, moduleParameter, yearParameter);
         }
     }
 }

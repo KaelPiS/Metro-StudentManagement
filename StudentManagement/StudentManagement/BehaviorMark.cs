@@ -24,6 +24,7 @@ namespace StudentManagement
         public Nullable<int> RegisteredParticipation { get; set; }
         public string ActivityGroupID { get; set; }
         public string Organization { get; set; }
+        public string SemesterID { get; set; }
     
         public virtual ActivityGroup ActivityGroup { get; set; }
         public virtual Student Student { get; set; }

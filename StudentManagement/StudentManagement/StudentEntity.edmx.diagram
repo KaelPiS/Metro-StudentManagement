@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="StudentDBModel.ScholarCondition" Width="1.5" PointX="5.25" PointY="30.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentDBModel.Scholarship" Width="1.5" PointX="7.5" PointY="31.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentDBModel.School" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudentDBModel.Semester" Width="1.5" PointX="12.125" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentDBModel.Semester" Width="1.5" PointX="14.375" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentDBModel.Student" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentDBModel.StudentUser" Width="1.5" PointX="7.5" PointY="27.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentDBModel.StudyFee" Width="1.5" PointX="10.5" PointY="19" IsExpanded="true" />

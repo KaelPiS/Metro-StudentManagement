@@ -26,6 +26,7 @@
     <EntitySetMapping Name="BehaviorMark">
       <EntityTypeMapping TypeName="StudentDBModel.BehaviorMark">
         <MappingFragment StoreEntitySet="BehaviorMark">
+          <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
           <ScalarProperty Name="Point" ColumnName="Point" />
@@ -295,18 +296,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="GetAcademicByID" FunctionName="StudentDBModel.Store.GetAcademicByID">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="StudentDBModel.GetAcademicByID_Result">
-          <ScalarProperty Name="DisciplineID" ColumnName="DisciplineID" />
-          <ScalarProperty Name="ProcessMark" ColumnName="ProcessMark" />
-          <ScalarProperty Name="MidtermMark" ColumnName="MidtermMark" />
-          <ScalarProperty Name="FinaltermMark" ColumnName="FinaltermMark" />
-          <ScalarProperty Name="AvarageMark" ColumnName="AvarageMark" />
-          <ScalarProperty Name="DisciplineStatus" ColumnName="DisciplineStatus" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetActivities" FunctionName="StudentDBModel.Store.GetActivities">
       <ResultMapping>
         <ComplexTypeMapping TypeName="StudentDBModel.GetActivities_Result">
@@ -746,6 +735,18 @@
           <ScalarProperty Name="Credits" ColumnName="Credits" />
           <ScalarProperty Name="Room" ColumnName="Room" />
           <ScalarProperty Name="Width" ColumnName="Width" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAcademicByID" FunctionName="StudentDBModel.Store.GetAcademicByID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="StudentDBModel.GetAcademicByID_Result">
+          <ScalarProperty Name="DisciplineID" ColumnName="DisciplineID" />
+          <ScalarProperty Name="ProcessMark" ColumnName="ProcessMark" />
+          <ScalarProperty Name="MidtermMark" ColumnName="MidtermMark" />
+          <ScalarProperty Name="FinaltermMark" ColumnName="FinaltermMark" />
+          <ScalarProperty Name="AvarageMark" ColumnName="AvarageMark" />
+          <ScalarProperty Name="DisciplineStatus" ColumnName="DisciplineStatus" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

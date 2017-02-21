@@ -41,6 +41,7 @@
           <Property Name="RegisteredParticipation" Type="int" />
           <Property Name="ActivityGroupID" Type="nvarchar" MaxLength="10" />
           <Property Name="Organization" Type="nvarchar" MaxLength="100" />
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Candre">
           <Key>
@@ -666,6 +667,8 @@
         <Function Name="Get10NewestGeneralAnouncements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAcademicByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="Year" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetActivities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Activities" Type="nvarchar" Mode="In" />
@@ -959,6 +962,7 @@
           <Property Name="Organization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ActivityGroup" Relationship="Self.Fk_ActivityGroupID" FromRole="BehaviorMark" ToRole="ActivityGroup" />
           <NavigationProperty Name="Student" Relationship="Self.fk_StudentID_BehaviorMark" FromRole="BehaviorMark" ToRole="Student" />
+          <Property Name="SemesterID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Candre">
           <Key>
@@ -1692,9 +1696,7 @@
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="TeacherUser" EntitySet="TeacherUser" />
           </AssociationSet>
-          <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
-          <Parameter Name="StudentID" Mode="In" Type="String" />
-          </FunctionImport>
+        
           <FunctionImport Name="GetActivities" ReturnType="Collection(StudentDBModel.GetActivities_Result)">
           <Parameter Name="Activities" Mode="In" Type="String" />
           </FunctionImport>
@@ -1840,6 +1842,11 @@
             <Parameter Name="Height" Mode="In" Type="Double" />
             <Parameter Name="Width" Mode="In" Type="Double" />
           </FunctionImport>
+          <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
+            <Parameter Name="StudentID" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
+          </FunctionImport>
         
           
          
@@ -1848,14 +1855,7 @@
          
          
         </EntityContainer>
-        <ComplexType Name="GetAcademicByID_Result">
-          <Property Type="String" Name="DisciplineID" Nullable="false" MaxLength="10" />
-          <Property Type="Double" Name="ProcessMark" Nullable="true" />
-          <Property Type="Double" Name="MidtermMark" Nullable="true" />
-          <Property Type="Double" Name="FinaltermMark" Nullable="true" />
-          <Property Type="Double" Name="AvarageMark" Nullable="true" />
-          <Property Type="Boolean" Name="DisciplineStatus" Nullable="true" />
-        </ComplexType>
+      
         <ComplexType Name="GetActivities_Result">
           <Property Type="String" Name="StudentID" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="ActivityName" Nullable="false" MaxLength="300" />
@@ -2207,6 +2207,14 @@
           <Property Type="String" Name="Room" Nullable="true" MaxLength="10" />
           <Property Type="Double" Name="Width" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetAcademicByID_Result">
+          <Property Type="String" Name="DisciplineID" Nullable="false" MaxLength="10" />
+          <Property Type="Double" Name="ProcessMark" Nullable="true" />
+          <Property Type="Double" Name="MidtermMark" Nullable="true" />
+          <Property Type="Double" Name="FinaltermMark" Nullable="true" />
+          <Property Type="Double" Name="AvarageMark" Nullable="true" />
+          <Property Type="Boolean" Name="DisciplineStatus" Nullable="true" />
+        </ComplexType>
       
       
       
@@ -2242,6 +2250,7 @@
           <EntitySetMapping Name="BehaviorMark">
             <EntityTypeMapping TypeName="StudentDBModel.BehaviorMark">
               <MappingFragment StoreEntitySet="BehaviorMark">
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
                 <ScalarProperty Name="Point" ColumnName="Point" />
@@ -2511,18 +2520,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetAcademicByID" FunctionName="StudentDBModel.Store.GetAcademicByID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="StudentDBModel.GetAcademicByID_Result">
-                <ScalarProperty Name="DisciplineID" ColumnName="DisciplineID" />
-                <ScalarProperty Name="ProcessMark" ColumnName="ProcessMark" />
-                <ScalarProperty Name="MidtermMark" ColumnName="MidtermMark" />
-                <ScalarProperty Name="FinaltermMark" ColumnName="FinaltermMark" />
-                <ScalarProperty Name="AvarageMark" ColumnName="AvarageMark" />
-                <ScalarProperty Name="DisciplineStatus" ColumnName="DisciplineStatus" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+        
           <FunctionImportMapping FunctionImportName="GetActivities" FunctionName="StudentDBModel.Store.GetActivities">
             <ResultMapping>
               <ComplexTypeMapping TypeName="StudentDBModel.GetActivities_Result">
@@ -2970,6 +2968,18 @@
                 <ScalarProperty Name="Credits" ColumnName="Credits" />
                 <ScalarProperty Name="Room" ColumnName="Room" />
                 <ScalarProperty Name="Width" ColumnName="Width" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAcademicByID" FunctionName="StudentDBModel.Store.GetAcademicByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentDBModel.GetAcademicByID_Result">
+                <ScalarProperty Name="DisciplineID" ColumnName="DisciplineID" />
+                <ScalarProperty Name="ProcessMark" ColumnName="ProcessMark" />
+                <ScalarProperty Name="MidtermMark" ColumnName="MidtermMark" />
+                <ScalarProperty Name="FinaltermMark" ColumnName="FinaltermMark" />
+                <ScalarProperty Name="AvarageMark" ColumnName="AvarageMark" />
+                <ScalarProperty Name="DisciplineStatus" ColumnName="DisciplineStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

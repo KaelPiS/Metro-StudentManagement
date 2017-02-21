@@ -41,6 +41,7 @@
     <Property Name="Organization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ActivityGroup" Relationship="Self.Fk_ActivityGroupID" FromRole="BehaviorMark" ToRole="ActivityGroup" />
     <NavigationProperty Name="Student" Relationship="Self.fk_StudentID_BehaviorMark" FromRole="BehaviorMark" ToRole="Student" />
+    <Property Name="SemesterID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Candre">
     <Key>
@@ -772,9 +773,6 @@
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="TeacherUser" EntitySet="TeacherUser" />
     </AssociationSet>
-    <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
-      <Parameter Name="StudentID" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="GetActivities" ReturnType="Collection(StudentDBModel.GetActivities_Result)">
       <Parameter Name="Activities" Mode="In" Type="String" />
     </FunctionImport>
@@ -908,15 +906,12 @@
       <Parameter Name="Height" Mode="In" Type="Double" />
       <Parameter Name="Width" Mode="In" Type="Double" />
     </FunctionImport>
+    <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
+      <Parameter Name="StudentID" Mode="In" Type="String" />
+      <Parameter Name="Module" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
-  <ComplexType Name="GetAcademicByID_Result">
-    <Property Type="String" Name="DisciplineID" Nullable="false" MaxLength="10" />
-    <Property Type="Double" Name="ProcessMark" Nullable="true" />
-    <Property Type="Double" Name="MidtermMark" Nullable="true" />
-    <Property Type="Double" Name="FinaltermMark" Nullable="true" />
-    <Property Type="Double" Name="AvarageMark" Nullable="true" />
-    <Property Type="Boolean" Name="DisciplineStatus" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="GetActivities_Result">
     <Property Type="String" Name="StudentID" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="ActivityName" Nullable="false" MaxLength="300" />
@@ -1257,5 +1252,13 @@
     <Property Type="Double" Name="Credits" Nullable="true" />
     <Property Type="String" Name="Room" Nullable="true" MaxLength="10" />
     <Property Type="Double" Name="Width" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetAcademicByID_Result">
+    <Property Type="String" Name="DisciplineID" Nullable="false" MaxLength="10" />
+    <Property Type="Double" Name="ProcessMark" Nullable="true" />
+    <Property Type="Double" Name="MidtermMark" Nullable="true" />
+    <Property Type="Double" Name="FinaltermMark" Nullable="true" />
+    <Property Type="Double" Name="AvarageMark" Nullable="true" />
+    <Property Type="Boolean" Name="DisciplineStatus" Nullable="true" />
   </ComplexType>
 </Schema>
