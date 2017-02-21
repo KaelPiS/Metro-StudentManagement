@@ -774,13 +774,10 @@
       <End Role="TeacherUser" EntitySet="TeacherUser" />
     </AssociationSet>
     <FunctionImport Name="GetActivities" ReturnType="Collection(StudentDBModel.GetActivities_Result)">
-      <Parameter Name="Activities" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="GetActivityGroup" ReturnType="Collection(StudentDBModel.GetActivityGroup_Result)">
-      <Parameter Name="StudentID" Mode="In" Type="String" />
+      <Parameter Name="GroupName" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetDetailActivity" ReturnType="Collection(StudentDBModel.GetDetailActivity_Result)">
-      <Parameter Name="Activitie" Mode="In" Type="String" />
+      <Parameter Name="Activity" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetDetailDisciplineByID" ReturnType="Collection(StudentDBModel.GetDetailDisciplineByID_Result)">
       <Parameter Name="DisciplineID" Mode="In" Type="String" />
@@ -901,12 +898,18 @@
     </FunctionImport>
     <FunctionImport Name="GetScheduleForDetail1" ReturnType="Collection(StudentDBModel.GetScheduleForDetail1_Result)">
       <Parameter Name="StudentID" Mode="In" Type="String" />
-      <Parameter Name="Semester" Mode="In" Type="String" />
+      <Parameter Name="Module" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
       <Parameter Name="StudyDate" Mode="In" Type="String" />
       <Parameter Name="Height" Mode="In" Type="Double" />
       <Parameter Name="Width" Mode="In" Type="Double" />
     </FunctionImport>
     <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
+      <Parameter Name="StudentID" Mode="In" Type="String" />
+      <Parameter Name="Module" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetActivityGroup" ReturnType="Collection(StudentDBModel.GetActivityGroup_Result)">
       <Parameter Name="StudentID" Mode="In" Type="String" />
       <Parameter Name="Module" Mode="In" Type="String" />
       <Parameter Name="Year" Mode="In" Type="String" />
@@ -924,10 +927,6 @@
     <Property Type="String" Name="ActivityGroupID" Nullable="true" MaxLength="10" />
     <Property Type="String" Name="Organization" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="IDGroup" Nullable="false" MaxLength="10" />
-    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="300" />
-    <Property Type="String" Name="Goal" Nullable="true" MaxLength="10" />
-  </ComplexType>
-  <ComplexType Name="GetActivityGroup_Result">
     <Property Type="String" Name="GroupName" Nullable="true" MaxLength="300" />
     <Property Type="String" Name="Goal" Nullable="true" MaxLength="10" />
   </ComplexType>
@@ -1260,5 +1259,9 @@
     <Property Type="Double" Name="FinaltermMark" Nullable="true" />
     <Property Type="Double" Name="AvarageMark" Nullable="true" />
     <Property Type="Boolean" Name="DisciplineStatus" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetActivityGroup_Result">
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="Goal" Nullable="true" MaxLength="10" />
   </ComplexType>
 </Schema>

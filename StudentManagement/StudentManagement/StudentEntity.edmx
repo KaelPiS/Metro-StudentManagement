@@ -671,10 +671,12 @@
           <Parameter Name="Year" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetActivities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Activities" Type="nvarchar" Mode="In" />
+          <Parameter Name="GroupName" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetActivityGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="Year" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetAllGeneralAnouncements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetClassDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -686,7 +688,7 @@
         </Function>
         <Function Name="GetDepartmentRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetDetailActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Activitie" Type="nvarchar" Mode="In" />
+          <Parameter Name="Activity" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetDetailDisciplineByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DisciplineID" Type="nvarchar" Mode="In" />
@@ -715,7 +717,8 @@
         </Function>
         <Function Name="GetScheduleForDetail1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
-          <Parameter Name="Semester" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="Year" Type="nvarchar" Mode="In" />
           <Parameter Name="StudyDate" Type="nvarchar" Mode="In" />
           <Parameter Name="Height" Type="float" Mode="In" />
           <Parameter Name="Width" Type="float" Mode="In" />
@@ -1698,13 +1701,11 @@
           </AssociationSet>
         
           <FunctionImport Name="GetActivities" ReturnType="Collection(StudentDBModel.GetActivities_Result)">
-          <Parameter Name="Activities" Mode="In" Type="String" />
+          <Parameter Name="GroupName" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetActivityGroup" ReturnType="Collection(StudentDBModel.GetActivityGroup_Result)">
-          <Parameter Name="StudentID" Mode="In" Type="String" />
-          </FunctionImport>
+          
           <FunctionImport Name="GetDetailActivity" ReturnType="Collection(StudentDBModel.GetDetailActivity_Result)">
-          <Parameter Name="Activitie" Mode="In" Type="String" />
+          <Parameter Name="Activity" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetDetailDisciplineByID" ReturnType="Collection(StudentDBModel.GetDetailDisciplineByID_Result)">
           <Parameter Name="DisciplineID" Mode="In" Type="String" />
@@ -1837,12 +1838,18 @@
           </FunctionImport>
           <FunctionImport Name="GetScheduleForDetail1" ReturnType="Collection(StudentDBModel.GetScheduleForDetail1_Result)">
             <Parameter Name="StudentID" Mode="In" Type="String" />
-            <Parameter Name="Semester" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
             <Parameter Name="StudyDate" Mode="In" Type="String" />
             <Parameter Name="Height" Mode="In" Type="Double" />
             <Parameter Name="Width" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
+            <Parameter Name="StudentID" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetActivityGroup" ReturnType="Collection(StudentDBModel.GetActivityGroup_Result)">
             <Parameter Name="StudentID" Mode="In" Type="String" />
             <Parameter Name="Module" Mode="In" Type="String" />
             <Parameter Name="Year" Mode="In" Type="String" />
@@ -1871,10 +1878,7 @@
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="Goal" Nullable="true" MaxLength="10" />
         </ComplexType>
-        <ComplexType Name="GetActivityGroup_Result">
-          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Goal" Nullable="true" MaxLength="10" />
-        </ComplexType>
+     
         <ComplexType Name="GetDetailActivity_Result">
           <Property Type="String" Name="StudentID" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="ActivityName" Nullable="false" MaxLength="300" />
@@ -2215,6 +2219,10 @@
           <Property Type="Double" Name="AvarageMark" Nullable="true" />
           <Property Type="Boolean" Name="DisciplineStatus" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetActivityGroup_Result">
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Goal" Nullable="true" MaxLength="10" />
+        </ComplexType>
       
       
       
@@ -2540,14 +2548,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetActivityGroup" FunctionName="StudentDBModel.Store.GetActivityGroup">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="StudentDBModel.GetActivityGroup_Result">
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="Goal" ColumnName="Goal" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+       
           <FunctionImportMapping FunctionImportName="GetDetailActivity" FunctionName="StudentDBModel.Store.GetDetailActivity">
             <ResultMapping>
               <ComplexTypeMapping TypeName="StudentDBModel.GetDetailActivity_Result">
@@ -2980,6 +2981,14 @@
                 <ScalarProperty Name="FinaltermMark" ColumnName="FinaltermMark" />
                 <ScalarProperty Name="AvarageMark" ColumnName="AvarageMark" />
                 <ScalarProperty Name="DisciplineStatus" ColumnName="DisciplineStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetActivityGroup" FunctionName="StudentDBModel.Store.GetActivityGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentDBModel.GetActivityGroup_Result">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Goal" ColumnName="Goal" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

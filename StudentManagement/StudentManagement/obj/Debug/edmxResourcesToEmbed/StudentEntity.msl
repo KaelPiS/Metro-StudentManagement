@@ -315,14 +315,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="GetActivityGroup" FunctionName="StudentDBModel.Store.GetActivityGroup">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="StudentDBModel.GetActivityGroup_Result">
-          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-          <ScalarProperty Name="Goal" ColumnName="Goal" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetDetailActivity" FunctionName="StudentDBModel.Store.GetDetailActivity">
       <ResultMapping>
         <ComplexTypeMapping TypeName="StudentDBModel.GetDetailActivity_Result">
@@ -747,6 +739,14 @@
           <ScalarProperty Name="FinaltermMark" ColumnName="FinaltermMark" />
           <ScalarProperty Name="AvarageMark" ColumnName="AvarageMark" />
           <ScalarProperty Name="DisciplineStatus" ColumnName="DisciplineStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetActivityGroup" FunctionName="StudentDBModel.Store.GetActivityGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="StudentDBModel.GetActivityGroup_Result">
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="Goal" ColumnName="Goal" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
