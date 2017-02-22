@@ -124,33 +124,39 @@
                             </i:Interaction.Triggers>
                         </ListBox>
                     </Expander>
-                    <Expander DataContext="{StaticResource key1}" Header="Activity Detail " Grid.Column="2" IsExpanded="True">
-                        <ListBox ItemsSource="{Binding DetailActivity}">
+                    <Expander Name="EpdActivityDetail"  DataContext="{StaticResource key1}" Header="Activity Detail " Grid.Column="2" IsExpanded="True">
+                        <ListBox  ItemsSource="{Binding DetailActivity}" SelectedIndex="0">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid  >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="6*"></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Row="0"  Text="{Binding ActivityName}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20" TextAlignment="Center" FontFamily="Consolas" FontWeight="Bold" ></TextBlock>
-                                        <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="15" Text="{Binding Organization}" FontFamily="consolas" Padding="10,30,1,0"></TextBlock>
-
-                                        <TextBlock HorizontalAlignment="Center" FontSize="15" Text="{Binding MaxParticipation}" Grid.Row="2" FontFamily="consolas" Padding="10,10,1,0"></TextBlock>
-
-                                        <TextBlock HorizontalAlignment="Center" FontSize="15" Text="{Binding RegisteredParticipation}" Grid.Row="3" FontFamily="consolas" Padding="10,10,1,0"></TextBlock>
+                                        
+                                        <TextBlock Grid.Row="0" Padding="0,30,0,30" Text="{Binding ActivityName}" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="35" TextAlignment="Center" FontFamily="Consolas" FontWeight="Bold" ></TextBlock>
 
 
-                                        <TextBlock HorizontalAlignment="Center" FontSize="15" Text="{Binding StartDay}" Grid.Row="4" FontFamily="consolas" Padding="10,10,1,0"></TextBlock>
+                                        <StackPanel Grid.Row="1" >
+                                            <TextBlock Padding="25,25,0,5"  Text="Organization" HorizontalAlignment="Center" FontSize="12"></TextBlock>
+                                            <TextBlock  Padding="25,0,0,15"  HorizontalAlignment="Center" FontSize="15" Text="{Binding Organization}" FontFamily="consolas" ></TextBlock>
+                                            <TextBlock Padding="25,10,0,5"  Text="Max Participation" HorizontalAlignment="Center" FontSize="12"></TextBlock>
+                                            <TextBlock Padding="25,0,0,15" HorizontalAlignment="Center" FontSize="15" Text="{Binding MaxParticipation}"  FontFamily="consolas" ></TextBlock>
+                                            <TextBlock Padding="25,10,0,5"  Text="Registered Participation" HorizontalAlignment="Center" FontSize="12"></TextBlock>
+                                            <TextBlock Padding="25,0,0,15" HorizontalAlignment="Center" FontSize="15" Text="{Binding RegisteredParticipation}" FontFamily="consolas"></TextBlock>
+                                            <TextBlock Padding="25,10,0,5"  Text="Start Day" HorizontalAlignment="Center" FontSize="12"></TextBlock>
 
-                                        <TextBlock HorizontalAlignment="Center" FontSize="15" Text="{Binding FinishDay}" Grid.Row="5" FontFamily="consolas" Padding="10,10,1,0"></TextBlock>
+                                            <TextBlock Padding="25,0,0,15" HorizontalAlignment="Center" FontSize="15" Text="{Binding StartDay}"  FontFamily="consolas" ></TextBlock>
+                                            <TextBlock Padding="25,10,0,5"  Text="Finish Day" HorizontalAlignment="Center" FontSize="12"></TextBlock>
+                                            <TextBlock Padding="25,0,0,15" HorizontalAlignment="Center" FontSize="15" Text="{Binding FinishDay}"  FontFamily="consolas" ></TextBlock>
 
+                                            </StackPanel>
+                                            
+                                        </Grid>
+                                       
+                                       
 
-                                    </Grid>
+                                   
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
