@@ -20,7 +20,7 @@ namespace StudentManagement.ViewModel
                 var thisUser = DialogLogginViewModel.Users[0];
                 if (_ActiveGroup == null)
                 {
-                    _ActiveGroup = new ObservableCollection<object>(ST.GetActivityGroup(thisUser.ID).ToList());
+                    _ActiveGroup = new ObservableCollection<object>(ST.GetActivityGroup(thisUser.ID, GetModule, GetYear).ToList());
                 }
                 return _ActiveGroup;
             }
@@ -67,7 +67,7 @@ namespace StudentManagement.ViewModel
             });
         }
         #endregion
- 
+
 
         #region Detail Activities, which show detail about one Activity
         public ICommand DetailCommand { get; set; }
@@ -112,6 +112,62 @@ namespace StudentManagement.ViewModel
         }
 
         #endregion
+
+
+        private string _GetModule = "Module 1";
+        public string GetModule
+        {
+            get
+            {
+                return _GetModule;
+            }
+
+            set
+            {
+                _GetModule = value;
+                OnPropertyChanged("GetModule");
+            }
+        }
+
+        private string _GetYear = "Year 1";
+        public string GetYear
+        {
+            get
+            {
+                return _GetYear;
+            }
+
+            set
+            {
+                _GetYear = value;
+                OnPropertyChanged("GetYear");
+            }
+        }
+
+        private ICommand _CmbChangeCommand;
+        public ICommand CmbChangeCommand
+        {
+            get
+            {
+                if (_CmbChangeCommand == null)
+                {
+                    _CmbChangeCommand = new RelayCommand<object>((p) => true, OnCmbChangeCommand);
+                }
+                return _CmbChangeCommand;
+            }
+        }
+        void OnCmbChangeCommand(object parameters)
+        {
+            var thisUser = DialogLogginViewModel.Users[0];
+            var values = (object[])parameters;
+            ComboBox Cmb_Module = values[0] as ComboBox;
+            ComboBox Cmb_Year = values[1] as ComboBox;
+            GetModule = ((ComboBoxItem)Cmb_Module.SelectedItem).Content.ToString();
+            GetYear = ((ComboBoxItem)Cmb_Year.SelectedItem).Content.ToString();
+            ActiveGroup = new ObservableCollection<object>(ST.GetActivityGroup(thisUser.ID, GetModule, GetYear).ToList());
+        }
+
+
 
         public BehaviorViewModel()
         {

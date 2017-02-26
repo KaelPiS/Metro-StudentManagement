@@ -23,7 +23,7 @@
 
             </Grid.Background>
         </Grid>
-        
+
 
         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <Grid>
@@ -33,7 +33,9 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-
+                <Grid.Resources>
+                    <ViewModel:ParameterConverter x:Key="ParaConverter"></ViewModel:ParameterConverter>
+                </Grid.Resources>
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -43,11 +45,25 @@
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                <StackPanel DataContext="{StaticResource key1}" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                     <ComboBox Margin="0,30,0,30"
                           BorderBrush="Green"
+                              SelectedIndex="0"
                           BorderThickness="2"
-                          Metro:TextBoxHelper.Watermark="Choose Module">
+                          Metro:TextBoxHelper.Watermark="Choose Module"
+                          Name="cmb_module">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CmbChangeCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource ParaConverter}">
+                                            <Binding ElementName="cmb_module"/>
+                                            <Binding ElementName="Cmb_year"/>
+                                        </MultiBinding>
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ComboBoxItem Content="Module 1">
 
                         </ComboBoxItem>
@@ -63,7 +79,21 @@
                           Margin="20,30,30,30"
                           BorderBrush="Green"
                           BorderThickness="2"
-                          Metro:TextBoxHelper.Watermark="Choose Year">
+                        SelectedIndex="0"
+                          Metro:TextBoxHelper.Watermark="Choose Year"
+                        Name="Cmb_year">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CmbChangeCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource ParaConverter}">
+                                            <Binding ElementName="cmb_module"/>
+                                            <Binding ElementName="Cmb_year"/>
+                                        </MultiBinding>
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ComboBoxItem Content="Year 1">
 
                         </ComboBoxItem>
@@ -79,7 +109,7 @@
                         </ComboBoxItem>
                     </ComboBox>
 
-                    
+
                 </StackPanel>
                 <GroupBox Margin="0" Name="grbAcademic" Header="Mark" Grid.Row="1" Grid.Column="1" DataContext="{StaticResource key1}">
                     <DataGrid IsReadOnly="True" Name="dtgAcademic"

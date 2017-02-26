@@ -23,15 +23,35 @@
                 </ImageBrush>
 
             </Grid.Background>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="0">
-                <ComboBox Margin="30,30,0,0"
+            <Grid.Resources>
+                <ViewModel:ParameterConverter x:Key="ParaConverter"></ViewModel:ParameterConverter>
+            </Grid.Resources>
+
+            <StackPanel DataContext="{StaticResource key1}" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                <ComboBox Margin="20,30,30,30"
                           BorderBrush="Green"
+                              SelectedIndex="0"
                           BorderThickness="2"
-                          Metro:TextBoxHelper.Watermark="Choose Module">
+                          Metro:TextBoxHelper.Watermark="Choose Module"
+                          Name="cmb_module">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding CmbChangeCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource ParaConverter}">
+                                        <Binding ElementName="cmb_module"/>
+                                        <Binding ElementName="Cmb_year"/>
+                                        <Binding ElementName="Grd_container"/>
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ComboBoxItem Content="Module 1">
 
                     </ComboBoxItem>
@@ -44,10 +64,25 @@
                 </ComboBox>
 
                 <ComboBox
-                          Margin="20,30,30,0"
+                          Margin="20,30,30,30"
                           BorderBrush="Green"
                           BorderThickness="2"
-                          Metro:TextBoxHelper.Watermark="Choose Year">
+                        SelectedIndex="0"
+                          Metro:TextBoxHelper.Watermark="Choose Year"
+                        Name="Cmb_year">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding CmbChangeCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource ParaConverter}">
+                                        <Binding ElementName="cmb_module"/>
+                                        <Binding ElementName="Cmb_year"/>
+                                        <Binding ElementName="Grd_container"/>
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ComboBoxItem Content="Year 1">
 
                     </ComboBoxItem>
@@ -142,7 +177,7 @@
                         </Border>
                         <Border  HorizontalAlignment="Stretch"  Grid.Row="1" BorderThickness="2" BorderBrush="Black">
                             <DataGrid VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Monday}">
-                                
+
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
@@ -226,12 +261,12 @@
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Wednesday"></TextBlock>
                         </Border>
                         <Border Grid.Row="1" BorderThickness="2" BorderBrush="Black">
-                            <DataGrid VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Wednesday}">
+                            <DataGrid  VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden"  HorizontalScrollBarVisibility="Hidden" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None" ItemsSource="{Binding Wednesday}">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn >
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Grid  Width="{ Binding Width }"   Height="{Binding Credits}">
+                                                <Grid   Width="{ Binding Width }"   Height="{Binding Credits}">
 
                                                     <Border   BorderBrush="Black" BorderThickness="2">
                                                         <Grid   >
@@ -385,7 +420,6 @@
                         </Border>
                     </Grid>
                 </Grid>
-
             </GroupBox>
         </Grid>
 

@@ -41,6 +41,7 @@
     <Property Name="Organization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ActivityGroup" Relationship="Self.Fk_ActivityGroupID" FromRole="BehaviorMark" ToRole="ActivityGroup" />
     <NavigationProperty Name="Student" Relationship="Self.fk_StudentID_BehaviorMark" FromRole="BehaviorMark" ToRole="Student" />
+    <Property Name="SemesterID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Candre">
     <Key>
@@ -774,15 +775,19 @@
     </AssociationSet>
     <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
       <Parameter Name="StudentID" Mode="In" Type="String" />
+      <Parameter Name="Module" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetActivities" ReturnType="Collection(StudentDBModel.GetActivities_Result)">
-      <Parameter Name="Activities" Mode="In" Type="String" />
+      <Parameter Name="GroupName" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetActivityGroup" ReturnType="Collection(StudentDBModel.GetActivityGroup_Result)">
       <Parameter Name="StudentID" Mode="In" Type="String" />
+      <Parameter Name="Module" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetDetailActivity" ReturnType="Collection(StudentDBModel.GetDetailActivity_Result)">
-      <Parameter Name="Activitie" Mode="In" Type="String" />
+      <Parameter Name="Activity" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetDetailDisciplineByID" ReturnType="Collection(StudentDBModel.GetDetailDisciplineByID_Result)">
       <Parameter Name="DisciplineID" Mode="In" Type="String" />
@@ -903,7 +908,8 @@
     </FunctionImport>
     <FunctionImport Name="GetScheduleForDetail1" ReturnType="Collection(StudentDBModel.GetScheduleForDetail1_Result)">
       <Parameter Name="StudentID" Mode="In" Type="String" />
-      <Parameter Name="Semester" Mode="In" Type="String" />
+      <Parameter Name="Module" Mode="In" Type="String" />
+      <Parameter Name="Year" Mode="In" Type="String" />
       <Parameter Name="StudyDate" Mode="In" Type="String" />
       <Parameter Name="Height" Mode="In" Type="Double" />
       <Parameter Name="Width" Mode="In" Type="Double" />

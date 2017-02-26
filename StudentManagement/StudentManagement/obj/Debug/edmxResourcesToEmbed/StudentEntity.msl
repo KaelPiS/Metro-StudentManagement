@@ -26,6 +26,7 @@
     <EntitySetMapping Name="BehaviorMark">
       <EntityTypeMapping TypeName="StudentDBModel.BehaviorMark">
         <MappingFragment StoreEntitySet="BehaviorMark">
+          <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
           <ScalarProperty Name="Point" ColumnName="Point" />

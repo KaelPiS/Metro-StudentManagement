@@ -170,7 +170,7 @@ namespace StudentManagement.ViewModel
         #endregion
 
         private double _Height;
-        private double _Width=193;
+        private double _Width = 193;
         public ICommand GetHeightALesson { get; set; }
 
         public double Height
@@ -201,18 +201,74 @@ namespace StudentManagement.ViewModel
             }
         }
 
+
+        private string _GetModule = "Module 1";
+        public string GetModule
+        {
+            get
+            {
+                return _GetModule;
+            }
+
+            set
+            {
+                _GetModule = value;
+                OnPropertyChanged("GetModule");
+            }
+        }
+
+        private string _GetYear = "Year 1";
+        public string GetYear
+        {
+            get
+            {
+                return _GetYear;
+            }
+
+            set
+            {
+                _GetYear = value;
+                OnPropertyChanged("GetYear");
+            }
+        }
+
+        private ICommand _CmbChangeCommand;
+        public ICommand CmbChangeCommand
+        {
+            get
+            {
+                if (_CmbChangeCommand == null)
+                {
+                    _CmbChangeCommand = new RelayCommand<object>((p) => true, OnCmbChangeCommand);
+                }
+                return _CmbChangeCommand;
+            }
+        }
+        void OnCmbChangeCommand(object parameters)
+        {
+            var thisUser = DialogLogginViewModel.Users[0];
+            var values = (object[])parameters;
+            ComboBox Cmb_Module = values[0] as ComboBox;
+            ComboBox Cmb_Year = values[1] as ComboBox;
+            Grid GrdContain = values[2] as Grid;
+            GetModule = ((ComboBoxItem)Cmb_Module.SelectedItem).Content.ToString();
+            GetYear = ((ComboBoxItem)Cmb_Year.SelectedItem).Content.ToString();
+            OnGetHeightALesson(GrdContain);
+        }
+
+
         private void OnGetHeightALesson(Grid Grd)
         {
-            var data = ST.IsDateRegister().ToList()[0];
+
             var thisUser = DialogLogginViewModel.Users[0];
-            Height = Math.Round(Grd.ActualHeight / 11-1, 0);
+            Height = Math.Round(Grd.ActualHeight / 11 - 1, 0);
             Width = Math.Round(Grd.ActualWidth / 6.5, 0);
-            Monday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, data.SemesterName, "Monday", Height,Width));
-            Tuesday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, data.SemesterName, "Tuesday", Height, Width));
-            Wednesday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, data.SemesterName, "Wednesday", Height, Width));
-            Thursday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, data.SemesterName, "Thursday", Height, Width));
-            Friday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, data.SemesterName, "Friday", Height, Width));
-            Saturday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, data.SemesterName, "Saturday", Height, Width));
+            Monday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, GetModule, GetYear, "Monday", Height, Width));
+            Tuesday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, GetModule, GetYear, "Tuesday", Height, Width));
+            Wednesday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, GetModule, GetYear, "Wednesday", Height, Width));
+            Thursday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, GetModule, GetYear, "Thursday", Height, Width));
+            Friday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, GetModule, GetYear, "Friday", Height, Width));
+            Saturday = new ObservableCollection<GetScheduleForDetail1_Result>(ST.GetScheduleForDetail1(thisUser.ID, GetModule, GetYear, "Saturday", Height, Width));
             AddEmpty(Monday);
             AddEmpty(Tuesday);
             AddEmpty(Wednesday);

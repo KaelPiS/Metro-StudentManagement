@@ -41,6 +41,7 @@
           <Property Name="RegisteredParticipation" Type="int" />
           <Property Name="ActivityGroupID" Type="nvarchar" MaxLength="10" />
           <Property Name="Organization" Type="nvarchar" MaxLength="100" />
+          <Property Name="SemesterID" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Candre">
           <Key>
@@ -666,12 +667,16 @@
         <Function Name="Get10NewestGeneralAnouncements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAcademicByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="Year" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetActivities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Activities" Type="nvarchar" Mode="In" />
+          <Parameter Name="GroupName" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetActivityGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="Year" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetAllGeneralAnouncements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetClassDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -683,7 +688,7 @@
         </Function>
         <Function Name="GetDepartmentRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetDetailActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Activitie" Type="nvarchar" Mode="In" />
+          <Parameter Name="Activity" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetDetailDisciplineByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DisciplineID" Type="nvarchar" Mode="In" />
@@ -712,7 +717,8 @@
         </Function>
         <Function Name="GetScheduleForDetail1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StudentID" Type="nvarchar" Mode="In" />
-          <Parameter Name="Semester" Type="nvarchar" Mode="In" />
+          <Parameter Name="Module" Type="nvarchar" Mode="In" />
+          <Parameter Name="Year" Type="nvarchar" Mode="In" />
           <Parameter Name="StudyDate" Type="nvarchar" Mode="In" />
           <Parameter Name="Height" Type="float" Mode="In" />
           <Parameter Name="Width" Type="float" Mode="In" />
@@ -959,6 +965,7 @@
           <Property Name="Organization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ActivityGroup" Relationship="Self.Fk_ActivityGroupID" FromRole="BehaviorMark" ToRole="ActivityGroup" />
           <NavigationProperty Name="Student" Relationship="Self.fk_StudentID_BehaviorMark" FromRole="BehaviorMark" ToRole="Student" />
+          <Property Name="SemesterID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Candre">
           <Key>
@@ -1693,16 +1700,20 @@
             <End Role="TeacherUser" EntitySet="TeacherUser" />
           </AssociationSet>
           <FunctionImport Name="GetAcademicByID" ReturnType="Collection(StudentDBModel.GetAcademicByID_Result)">
-          <Parameter Name="StudentID" Mode="In" Type="String" />
+            <Parameter Name="StudentID" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetActivities" ReturnType="Collection(StudentDBModel.GetActivities_Result)">
-          <Parameter Name="Activities" Mode="In" Type="String" />
+          <Parameter Name="GroupName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetActivityGroup" ReturnType="Collection(StudentDBModel.GetActivityGroup_Result)">
-          <Parameter Name="StudentID" Mode="In" Type="String" />
+            <Parameter Name="StudentID" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetDetailActivity" ReturnType="Collection(StudentDBModel.GetDetailActivity_Result)">
-          <Parameter Name="Activitie" Mode="In" Type="String" />
+          <Parameter Name="Activity" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetDetailDisciplineByID" ReturnType="Collection(StudentDBModel.GetDetailDisciplineByID_Result)">
           <Parameter Name="DisciplineID" Mode="In" Type="String" />
@@ -1835,7 +1846,8 @@
           </FunctionImport>
           <FunctionImport Name="GetScheduleForDetail1" ReturnType="Collection(StudentDBModel.GetScheduleForDetail1_Result)">
             <Parameter Name="StudentID" Mode="In" Type="String" />
-            <Parameter Name="Semester" Mode="In" Type="String" />
+            <Parameter Name="Module" Mode="In" Type="String" />
+            <Parameter Name="Year" Mode="In" Type="String" />
             <Parameter Name="StudyDate" Mode="In" Type="String" />
             <Parameter Name="Height" Mode="In" Type="Double" />
             <Parameter Name="Width" Mode="In" Type="Double" />
@@ -2242,6 +2254,7 @@
           <EntitySetMapping Name="BehaviorMark">
             <EntityTypeMapping TypeName="StudentDBModel.BehaviorMark">
               <MappingFragment StoreEntitySet="BehaviorMark">
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
                 <ScalarProperty Name="Point" ColumnName="Point" />

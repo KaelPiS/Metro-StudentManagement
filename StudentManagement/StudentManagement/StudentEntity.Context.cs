@@ -56,40 +56,56 @@ namespace StudentManagement
         public virtual DbSet<DisciplineAnouncement> DisciplineAnouncement { get; set; }
         public virtual DbSet<UniversityInfo> UniversityInfo { get; set; }
     
-        public virtual ObjectResult<GetAcademicByID_Result> GetAcademicByID(string studentID)
+        public virtual ObjectResult<GetAcademicByID_Result> GetAcademicByID(string studentID, string module, string year)
         {
             var studentIDParameter = studentID != null ?
                 new ObjectParameter("StudentID", studentID) :
                 new ObjectParameter("StudentID", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAcademicByID_Result>("GetAcademicByID", studentIDParameter);
+            var moduleParameter = module != null ?
+                new ObjectParameter("Module", module) :
+                new ObjectParameter("Module", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAcademicByID_Result>("GetAcademicByID", studentIDParameter, moduleParameter, yearParameter);
         }
     
-        public virtual ObjectResult<GetActivities_Result> GetActivities(string activities)
+        public virtual ObjectResult<GetActivities_Result> GetActivities(string groupName)
         {
-            var activitiesParameter = activities != null ?
-                new ObjectParameter("Activities", activities) :
-                new ObjectParameter("Activities", typeof(string));
+            var groupNameParameter = groupName != null ?
+                new ObjectParameter("GroupName", groupName) :
+                new ObjectParameter("GroupName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetActivities_Result>("GetActivities", activitiesParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetActivities_Result>("GetActivities", groupNameParameter);
         }
     
-        public virtual ObjectResult<GetActivityGroup_Result> GetActivityGroup(string studentID)
+        public virtual ObjectResult<GetActivityGroup_Result> GetActivityGroup(string studentID, string module, string year)
         {
             var studentIDParameter = studentID != null ?
                 new ObjectParameter("StudentID", studentID) :
                 new ObjectParameter("StudentID", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetActivityGroup_Result>("GetActivityGroup", studentIDParameter);
+            var moduleParameter = module != null ?
+                new ObjectParameter("Module", module) :
+                new ObjectParameter("Module", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetActivityGroup_Result>("GetActivityGroup", studentIDParameter, moduleParameter, yearParameter);
         }
     
-        public virtual ObjectResult<GetDetailActivity_Result> GetDetailActivity(string activitie)
+        public virtual ObjectResult<GetDetailActivity_Result> GetDetailActivity(string activity)
         {
-            var activitieParameter = activitie != null ?
-                new ObjectParameter("Activitie", activitie) :
-                new ObjectParameter("Activitie", typeof(string));
+            var activityParameter = activity != null ?
+                new ObjectParameter("Activity", activity) :
+                new ObjectParameter("Activity", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDetailActivity_Result>("GetDetailActivity", activitieParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDetailActivity_Result>("GetDetailActivity", activityParameter);
         }
     
         public virtual ObjectResult<GetDetailDisciplineByID_Result> GetDetailDisciplineByID(string disciplineID)
@@ -453,15 +469,19 @@ namespace StudentManagement
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectAnouncementTypeInRange_Result>("SelectAnouncementTypeInRange", startParameter, endParameter, typeParameter);
         }
     
-        public virtual ObjectResult<GetScheduleForDetail1_Result> GetScheduleForDetail1(string studentID, string semester, string studyDate, Nullable<double> height, Nullable<double> width)
+        public virtual ObjectResult<GetScheduleForDetail1_Result> GetScheduleForDetail1(string studentID, string module, string year, string studyDate, Nullable<double> height, Nullable<double> width)
         {
             var studentIDParameter = studentID != null ?
                 new ObjectParameter("StudentID", studentID) :
                 new ObjectParameter("StudentID", typeof(string));
     
-            var semesterParameter = semester != null ?
-                new ObjectParameter("Semester", semester) :
-                new ObjectParameter("Semester", typeof(string));
+            var moduleParameter = module != null ?
+                new ObjectParameter("Module", module) :
+                new ObjectParameter("Module", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("Year", year) :
+                new ObjectParameter("Year", typeof(string));
     
             var studyDateParameter = studyDate != null ?
                 new ObjectParameter("StudyDate", studyDate) :
@@ -475,7 +495,7 @@ namespace StudentManagement
                 new ObjectParameter("Width", width) :
                 new ObjectParameter("Width", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetScheduleForDetail1_Result>("GetScheduleForDetail1", studentIDParameter, semesterParameter, studyDateParameter, heightParameter, widthParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetScheduleForDetail1_Result>("GetScheduleForDetail1", studentIDParameter, moduleParameter, yearParameter, studyDateParameter, heightParameter, widthParameter);
         }
     }
 }
