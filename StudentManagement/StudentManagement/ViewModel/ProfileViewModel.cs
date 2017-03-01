@@ -1,13 +1,9 @@
 ﻿using MahApps.Metro.Controls;
 using StudentManagement.View;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Speech.Synthesis;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -222,7 +218,20 @@ namespace StudentManagement.ViewModel
         }
         private string mobile = string.Empty;
 
-        public ICommand SaveChangesCommand { get; set; }
+        private ICommand _SaveChangesCommand;
+
+        public ICommand SaveChangesCommand
+        {
+            get
+            {
+                if (_SaveChangesCommand == null)
+                {
+                    _SaveChangesCommand = new RelayCommand<object>((p) => true, OnSaveChangesCommand);
+                }
+                return _SaveChangesCommand;
+            }
+        }
+
         public string Mobile
         {
             get
@@ -239,7 +248,18 @@ namespace StudentManagement.ViewModel
 
         #endregion
 
-        public ICommand TextReviveWhenLostFocus { get; set; }
+        private ICommand _TextReviveWhenLostFocus;
+        public ICommand TextReviveWhenLostFocus
+        {
+            get
+            {
+                if (_TextReviveWhenLostFocus==null)
+                {
+                    _TextReviveWhenLostFocus = new RelayCommand<object>((p) => true, OnTextReviveWhenLostFocus);
+                }
+                return _TextReviveWhenLostFocus;
+            }
+        }
 
         private void OnTextReviveWhenLostFocus(object parameters)
         {
@@ -328,10 +348,54 @@ namespace StudentManagement.ViewModel
                 warningAudio.SpeakAsync("Save failed..");
         }
 
-        public ICommand OpenClassDetail { get; set; }
-        public ICommand OpenFacultyDetail { get; set; }
-        public ICommand OpenDepartmentDetail { get; set; }
-        public ICommand OpenSchoolDetail { get; set; }
+        private ICommand _OpenClassDetail;
+        public ICommand OpenClassDetail
+        {
+            get
+            {
+                if (_OpenClassDetail == null)
+                {
+                    _OpenClassDetail = new RelayCommand<object>((p) => true, OnOpenClassDetail);
+                }
+                return _OpenClassDetail;
+            }
+        }
+        private ICommand _OpenFacultyDetail;
+        public ICommand OpenFacultyDetail
+        {
+            get
+            {
+                if (_OpenFacultyDetail == null)
+                {
+                    _OpenFacultyDetail = new RelayCommand<object>((p) => true, OnOpenFacultyDetail);
+                }
+                return _OpenFacultyDetail;
+            }
+        }
+        private ICommand _OpenDepartmentDetail;
+        public ICommand OpenDepartmentDetail
+        {
+            get
+            {
+                if (_OpenDepartmentDetail == null)
+                {
+                    _OpenDepartmentDetail = new RelayCommand<object>((p) => true, OnOpenDepartmentDetail);
+                }
+                return _OpenDepartmentDetail;
+            }
+        }
+        private ICommand _OpenSchoolDetail;
+        public ICommand OpenSchoolDetail
+        {
+            get
+            {
+                if (_OpenSchoolDetail == null)
+                {
+                    _OpenSchoolDetail = new RelayCommand<object>((p) => true, OnOpenSchoolDetail);
+                }
+                return _OpenSchoolDetail;
+            }
+        }
 
 
         private void createDetailWindow()
@@ -419,17 +483,10 @@ namespace StudentManagement.ViewModel
         private void InitProfile()
         {
             GetDataFromServer();
-            SaveChangesCommand = new RelayCommand<object>((p) => true, OnSaveChangesCommand);
-            TextReviveWhenLostFocus = new RelayCommand<object>((p) => true, OnTextReviveWhenLostFocus);
-            OpenClassDetail = new RelayCommand<object>((p) => true, OnOpenClassDetail);
-            OpenFacultyDetail = new RelayCommand<object>((p) => true, OnOpenFacultyDetail);
-            OpenDepartmentDetail = new RelayCommand<object>((p) => true, OnOpenDepartmentDetail);
-            OpenSchoolDetail = new RelayCommand<object>((p) => true, OnOpenSchoolDetail);
         }
         public ProfileViewModel()
         {
             InitProfile();
-
         }
 
         private void DetailWindow_Closed(object sender, EventArgs e)

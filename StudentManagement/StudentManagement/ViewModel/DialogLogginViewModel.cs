@@ -59,8 +59,6 @@ namespace StudentManagement.ViewModel
                 ColorScheme = metroWindow.MetroDialogOptions.ColorScheme,
                 RememberCheckBoxVisibility = System.Windows.Visibility.Visible,
                 NegativeButtonVisibility = System.Windows.Visibility.Visible,
-                InitialPassword = "6",
-                InitialUsername="63500"
             };
 
             LoginDialogData result = await metroWindow.ShowLoginAsync("Authentication", "Enter your password", settings);
@@ -71,9 +69,16 @@ namespace StudentManagement.ViewModel
             }
             else
             {
-         
                 Users =new ObservableCollection<GetUser_Result>(St.GetUser(result.Username, result.Password).ToList());
-                St.UpdateStarDay(Users[0].ID);
+                try
+                {
+                    St.UpdateStarDay(Users[0].ID);
+                }
+                catch
+                {
+                    MessageDialogResult messageResult = await metroWindow.ShowMessageAsync("Authentication Information", String.Format("Error occured, please try again.."));
+                }
+
                 if (Users.Count() != 0 && isLoggedIn == false)
                 {
                     isLoggedIn = true;
