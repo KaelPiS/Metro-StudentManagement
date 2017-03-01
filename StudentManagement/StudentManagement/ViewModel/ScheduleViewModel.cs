@@ -1,12 +1,6 @@
-﻿using MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Speech.Synthesis;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -171,7 +165,18 @@ namespace StudentManagement.ViewModel
 
         private double _Height;
         private double _Width = 193;
-        public ICommand GetHeightALesson { get; set; }
+        private ICommand _GetHeightALesson;
+        public ICommand GetHeightALesson
+        {
+            get
+            {
+                if (_GetHeightALesson == null)
+                {
+                    _GetHeightALesson = new RelayCommand<Grid>((p) => true, OnGetHeightALesson);
+                }
+                return _GetHeightALesson;
+            }
+        }
 
         public double Height
         {
@@ -276,18 +281,5 @@ namespace StudentManagement.ViewModel
             AddEmpty(Friday);
             AddEmpty(Saturday);
         }
-
-
-
-        public ScheduleViewModel()
-        {
-            GetHeightALesson = new RelayCommand<Grid>((p) => true, OnGetHeightALesson);
-
-
-
-        }
-
-
-
     }
 }

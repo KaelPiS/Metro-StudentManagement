@@ -19,7 +19,7 @@ namespace StudentManagement.ViewModel
         StudentDBEntities ST = new StudentDBEntities();
         MetroWindow metroWindow = (Application.Current.MainWindow as MetroWindow);
         string UserPassword = string.Empty; //Hold the User current Password
-    
+
         #region For Account View
 
         #region Student Collection and Get-Set Property
@@ -171,8 +171,19 @@ namespace StudentManagement.ViewModel
 
 
         #region AccountCommand-Open Account Flyout and do some stuffs
-     
-        public ICommand Accounts { get; set; } 
+
+        private ICommand _Accounts;
+        public ICommand Accounts
+        {
+            get
+            {
+                if (_Accounts == null)
+                {
+                    _Accounts = new RelayCommand<object>((p) => true, OnAccountCommand);
+                }
+                return _Accounts;
+            }
+        }
         private void OnAccountCommand(object obj)
         {
             IsAccountFlyoutOpen = true;
@@ -188,7 +199,18 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region SettingsCommand-Open AccountSettings and do some stuffs
-        public ICommand Settings { get; set; } //This command open Settings Flyout and do some stuffs
+        private ICommand _Settings;
+        public ICommand Settings
+        {
+            get
+            {
+                if (_Settings == null)
+                {
+                    _Settings = new RelayCommand<object>((p) => true, OnSettingsCommand);
+                }
+                return _Settings;
+            }
+        }
         void OnSettingsCommand(object obj)
         {
             IsAccountFlyoutOpen = false;
@@ -215,7 +237,7 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region IsChangePasswordOpen-hold the visibility of Change Password groupbox
-        private bool isChangePasswordOpen; 
+        private bool isChangePasswordOpen;
         public bool IsChangePasswordOpen
         {
             get
@@ -251,7 +273,18 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region ChangePasswordOpenCommand-Set the visibility of ChangePassword Groupbox
-        public ICommand ChangePasswordOpenCommand { get; set; }
+        private ICommand _ChangePasswordOpenCommand;
+        public ICommand ChangePasswordOpenCommand
+        {
+            get
+            {
+                if (_ChangePasswordOpenCommand == null)
+                {
+                    _ChangePasswordOpenCommand = new RelayCommand<object>((p) => true, OnChangePasswordOpenCommand);
+                }
+                return _ChangePasswordOpenCommand;
+            }
+        }
         private void OnChangePasswordOpenCommand(object obj)
         {
             IsChangePasswordOpen = true;
@@ -260,7 +293,18 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region ChangePictureOpenCommand-Set the visibility of ChangeProfilePicture GroupBox
-        public ICommand ChangePictureOpenCommand { get; set; }
+        private ICommand _ChangePictureOpenCommand;
+        public ICommand ChangePictureOpenCommand
+        {
+            get
+            {
+                if (_ChangePictureOpenCommand == null)
+                {
+                    _ChangePictureOpenCommand = new RelayCommand<object>((p) => true, OnChangeProfilePictureOpenCommand);
+                }
+                return _ChangePictureOpenCommand;
+            }
+        }
         private void OnChangeProfilePictureOpenCommand(object obj)
         {
             IsChangePasswordOpen = false;
@@ -269,7 +313,7 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region ProfilePictureSource variable-hold the Source of ProfilePicture
-        private ImageSource _ProfilePictureSource; 
+        private ImageSource _ProfilePictureSource;
         public ImageSource ProfilePictureSource
         {
             get
@@ -304,9 +348,20 @@ namespace StudentManagement.ViewModel
         #endregion
 
 
- 
+
         #region BrowseCommand-Click to open a FileOpenDialog and choose profile picture
-        public ICommand BrowseCommand { get; set; }
+        private ICommand _BrowseCommand;
+        public ICommand BrowseCommand
+        {
+            get
+            {
+                if (_BrowseCommand == null)
+                {
+                    _BrowseCommand = new RelayCommand<object>((p) => true, OnBrowseButtonCommand);
+                }
+                return _BrowseCommand;
+            }
+        }
         private void OnBrowseButtonCommand(object obj)
         {
             UserImage image = new UserImage();
@@ -322,7 +377,18 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region ConfirmChangePictureCommand-Confirm the Selected Image and do some stuffs
-        public ICommand ConfirmChangePictureCommand { get; set; }
+        private ICommand _ConfirmChangePictureCommand;
+        public ICommand ConfirmChangePictureCommand
+        {
+            get
+            {
+                if (_ConfirmChangePictureCommand == null)
+                {
+                    _ConfirmChangePictureCommand = new RelayCommand<object>((p) => true, OnConfirmChangePictureCommand);
+                }
+                return _ConfirmChangePictureCommand;
+            }
+        }
         private void OnConfirmChangePictureCommand(object obj)
         {
             if (ProfilePictureSource == null && PicturePath == null)
@@ -330,20 +396,31 @@ namespace StudentManagement.ViewModel
                 warningAudio.SpeakAsync("You have not selected a picture yet. Click browse to select one..");
                 return;
             }
-            
+
             UserImage data = new UserImage();
             var ImagePath = PicturePath;
             var ImageToByte = File.ReadAllBytes(PicturePath);
             ST.AddNewUserImage(ImagePath, ImageToByte, Students[0].StudentID);
             ST.SaveChanges();
-            
+
             warningAudio.SpeakAsync("Change successfully..");
- 
+
         }
         #endregion
 
         #region ConfirmChangePasswordCommand-Confirm the input password
-        public ICommand ConfirmChangePasswordCommand { get; set; }
+        private ICommand _ConfirmChangePasswordCommand;
+        public ICommand ConfirmChangePasswordCommand
+        {
+            get
+            {
+                if (_ConfirmChangePasswordCommand == null)
+                {
+                    _ConfirmChangePasswordCommand = new RelayCommand<object>((p) => true, OnComfirmChangePasswordCommand);
+                }
+                return _ConfirmChangePasswordCommand;
+            }
+        }
         private void OnComfirmChangePasswordCommand(object obj)
         {
             if (CheckCorrectPasswordError == true || CorrectPasswordProperty == string.Empty)
@@ -384,7 +461,18 @@ namespace StudentManagement.ViewModel
             PicturePath = string.Empty;
             ImageUrl = null;
         }
-        public ICommand SignOutCommand { get; set; }
+        private ICommand _SignOutCommand;
+        public ICommand SignOutCommand
+        {
+            get
+            {
+                if (_SignOutCommand == null)
+                {
+                    _SignOutCommand = new RelayCommand<object>((p) => true, OnSignOutCommand);
+                }
+                return _SignOutCommand;
+            }
+        }
         private void OnSignOutCommand(object obj)
         {
             foreach (Window window in Application.Current.Windows)
@@ -495,7 +583,18 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region NewPasswordGotFocusCommand-GetFocus command on NewPassword Text Box
-        public ICommand NewPasswordGotFocusCommand { get; set; }
+        private ICommand _NewPasswordGotFocusCommand;
+        public ICommand NewPasswordGotFocusCommand
+        {
+            get
+            {
+                if (_NewPasswordGotFocusCommand == null)
+                {
+                    _NewPasswordGotFocusCommand = new RelayCommand<object>((p) => true, OnNewPasswordGotFocusCommand);
+                }
+                return _NewPasswordGotFocusCommand;
+            }
+        }
         private void OnNewPasswordGotFocusCommand(object obj)
         {
             NewPassword = string.Empty;
@@ -504,7 +603,18 @@ namespace StudentManagement.ViewModel
         #endregion
 
         #region RetypeGotFocusCommand-GetFocus command on RetypePassword Text Box
-        public ICommand RetypePasswordGotFocusCommand { get; set; }
+        private ICommand _RetypePasswordGotFocusCommand;
+        public ICommand RetypePasswordGotFocusCommand
+        {
+            get
+            {
+                if (_RetypePasswordGotFocusCommand == null)
+                {
+                    _RetypePasswordGotFocusCommand = new RelayCommand<object>((p) => true, OnRetypePasswordGotFocusCommand);
+                }
+                return _RetypePasswordGotFocusCommand;
+            }
+        }
         private void OnRetypePasswordGotFocusCommand(object obj)
         {
             RetypePasswordProperty = string.Empty;
@@ -602,31 +712,9 @@ namespace StudentManagement.ViewModel
         }
 
         #endregion
-
-        private void InitAccountView()
-        {
-            Accounts = new RelayCommand<object>((p) => true, OnAccountCommand);
-            Settings = new RelayCommand<object>((p) => true, OnSettingsCommand);
-        }
-
-
-        private void InitUserSettingsView()
-        {
-            BrowseCommand = new RelayCommand<object>((p) => true, OnBrowseButtonCommand);
-            ConfirmChangePictureCommand = new RelayCommand<object>((p) => true, OnConfirmChangePictureCommand);
-            ChangePasswordOpenCommand = new RelayCommand<object>((p) => true, OnChangePasswordOpenCommand);
-            ChangePictureOpenCommand = new RelayCommand<object>((p) => true, OnChangeProfilePictureOpenCommand);
-            SignOutCommand = new RelayCommand<object>((p) => true, OnSignOutCommand);
-            ConfirmChangePasswordCommand = new RelayCommand<object>((p) => true, OnComfirmChangePasswordCommand);
-            NewPasswordGotFocusCommand = new RelayCommand<object>((p) => true, OnNewPasswordGotFocusCommand);
-            RetypePasswordGotFocusCommand = new RelayCommand<object>((p) => true, OnRetypePasswordGotFocusCommand);
-        }
-
         public MainViewModel()
         {
             InitViewModelList();
-            InitAccountView();
-            InitUserSettingsView();
         }
     }
 }

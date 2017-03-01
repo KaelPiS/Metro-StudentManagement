@@ -36,7 +36,24 @@ namespace StudentManagement.ViewModel
 
 
         #region Activities List, which hold all the activities of one Group
-        public ICommand ActivitiesCommand { get; set; }
+        private ICommand _ActivitiesCommand;
+        
+        public ICommand ActivitiesCommand
+        {
+            get
+            {
+                if (_ActivitiesCommand == null)
+                {
+                    _ActivitiesCommand = new RelayCommand<ListBox>((p) => true, (p) =>
+                    {
+                        GetActivityGroup_Result data = (GetActivityGroup_Result)p.SelectedItem;
+                        GroupName = data.GroupName;
+                        Activities = new ObservableCollection<object>(ST.GetActivities(GroupName).ToList());
+                    });
+                }
+                return _ActivitiesCommand;
+            }
+        }
         private ObservableCollection<object> _Activities;
         public ObservableCollection<object> Activities
         {
@@ -57,20 +74,11 @@ namespace StudentManagement.ViewModel
             }
         }
 
-        void OnActivitiesCommand()
-        {
-            ActivitiesCommand = new RelayCommand<ListBox>((p) => true, (p) =>
-            {
-                GetActivityGroup_Result data = (GetActivityGroup_Result)p.SelectedItem;
-                GroupName = data.GroupName;
-                Activities = new ObservableCollection<object>(ST.GetActivities(GroupName).ToList());
-            });
-        }
         #endregion
 
 
         #region Detail Activities, which show detail about one Activity
-        public ICommand DetailCommand { get; set; }
+        private ICommand _DetailCommand;
         private ObservableCollection<object> _DetailActivity;
         public ObservableCollection<object> DetailActivity
         {
@@ -91,24 +99,21 @@ namespace StudentManagement.ViewModel
             }
         }
 
-        private void OnDetailCommand()
+        private void OnDetailCommand(ListBox currentListBox)
         {
-            DetailCommand = new RelayCommand<ListBox>((p) => true, (p) =>
+            if (currentListBox.Items.Count <= 0) Activities_ = string.Empty;
+            else
             {
-
-                if (p.Items.Count <= 0) Activities_ = string.Empty;
-                else
+                try
                 {
-                    try
-                    {
-                        GetActivities_Result data = (GetActivities_Result)p.SelectedItem;
-                        Activities_ = data.ActivityName;
-                    }
-                    catch { }
+                    GetActivities_Result data = (GetActivities_Result)currentListBox.SelectedItem;
+                    Activities_ = data.ActivityName;
                 }
-                if (p.SelectedIndex < 0) p.SelectedIndex = 0;
-                DetailActivity = new ObservableCollection<object>(ST.GetDetailActivity(Activities_).ToList());
-            });
+                catch { }
+            }
+            if (currentListBox.SelectedIndex < 0) currentListBox.SelectedIndex = 0;
+            DetailActivity = new ObservableCollection<object>(ST.GetDetailActivity(Activities_).ToList());
+        
         }
 
         #endregion
@@ -156,6 +161,19 @@ namespace StudentManagement.ViewModel
                 return _CmbChangeCommand;
             }
         }
+
+        public ICommand DetailCommand
+        {
+            get
+            {
+                if (_DetailCommand==null)
+                {
+                    _DetailCommand = new RelayCommand<ListBox>((p) => true, OnDetailCommand);
+                }
+                return _DetailCommand;
+            }
+        }
+
         void OnCmbChangeCommand(object parameters)
         {
             var thisUser = DialogLogginViewModel.Users[0];
@@ -169,11 +187,6 @@ namespace StudentManagement.ViewModel
 
 
 
-        public BehaviorViewModel()
-        {
-            OnActivitiesCommand();
-            OnDetailCommand();
-        }
 
     }
 }

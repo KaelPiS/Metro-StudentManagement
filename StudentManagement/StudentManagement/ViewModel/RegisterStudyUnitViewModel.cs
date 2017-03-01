@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Speech.Synthesis;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -201,7 +195,19 @@ namespace StudentManagement.ViewModel
         }
         #endregion
         #region OnRegisterCommand When have char Enter
-        public ICommand RegisterCommand { get; set; }
+        private ICommand _RegisterCommand;
+        public ICommand RegisterCommand
+        {
+            get
+            {
+                if (_RegisterCommand==null)
+                {
+                    _RegisterCommand = new RelayCommand<object>((p) => true, OnRegisterCommand);
+                }
+                return _RegisterCommand;
+            }
+        }
+      
         private void OnRegisterCommand(object parameters)
         {
 
@@ -222,7 +228,17 @@ namespace StudentManagement.ViewModel
         #region DeleteRegistered
 
 
-        public ICommand DeleteRegistered { get; set; }
+        private ICommand _DeleteRegistered;
+        public ICommand DeleteRegistered
+        {
+            get
+            {
+                if (_DeleteRegistered == null)
+                    _DeleteRegistered = new RelayCommand<DataGrid>((p) => true, OnDeleteRegistered);
+                return _DeleteRegistered;
+            }
+
+        }
 
         private void OnDeleteRegistered(DataGrid Dtg)
         {
@@ -239,7 +255,18 @@ namespace StudentManagement.ViewModel
         }
         #endregion
         #region InsertRegisterFromListDisciplineCommand
-        public ICommand InsertRegisterFromListDisciplineCommand { get; set; }
+        private ICommand _InsertRegisterFromListDisciplineCommand;
+        public ICommand InsertRegisterFromListDisciplineCommand
+        {
+            get
+            {
+                if (_InsertRegisterFromListDisciplineCommand==null)
+                {
+                    _InsertRegisterFromListDisciplineCommand = new RelayCommand<object>((p) => true, OnInsertRegisterFromListDisciplineCommand);
+                }
+                return _InsertRegisterFromListDisciplineCommand;
+            }
+        }
         private void OnInsertRegisterFromListDisciplineCommand(object Parameters)
         {
             var values = (object[])Parameters;
@@ -294,15 +321,7 @@ namespace StudentManagement.ViewModel
             ListRegistered = new ObservableCollection<GetInfoRegistered_Result>(ST.GetInfoRegistered(thisUser.ID).ToList());
         }
         #endregion
-        #region Initial command
-        void Command()
-        {
-            SortByTeacherAndDepartment = new RelayCommand<object>((p) => true, OnSortByTeacherAndDepartment);
-            RegisterCommand = new RelayCommand<object>((p) => true, OnRegisterCommand);
-            DeleteRegistered = new RelayCommand<DataGrid>((p) => true, OnDeleteRegistered);
-            InsertRegisterFromListDisciplineCommand = new RelayCommand<object>((p) => true, OnInsertRegisterFromListDisciplineCommand);
-        }
-        #endregion
+      
         #region GetTeacherDiscipline
         private ObservableCollection<String> _GetTeacherDiscipline;
         public ObservableCollection<String> GetTeacherDiscipline
@@ -350,7 +369,18 @@ namespace StudentManagement.ViewModel
         }
         #endregion
         #region SortByTeacherAndDepartment command
-        public ICommand SortByTeacherAndDepartment { get; set; }
+        private ICommand _SortByTeacherAndDepartment;
+        public ICommand SortByTeacherAndDepartment
+        {
+            get
+            {
+                if (_SortByTeacherAndDepartment==null)
+                {
+                    _SortByTeacherAndDepartment = new RelayCommand<object>((p) => true, OnSortByTeacherAndDepartment);
+                }
+                return _SortByTeacherAndDepartment;
+            }
+        }
         private void OnSortByTeacherAndDepartment(object Parameters)
         {
             var values = (object[])Parameters;
@@ -503,8 +533,6 @@ namespace StudentManagement.ViewModel
 
         public RegisterStudyUnitViewModel()
         {
-            Command();
-
             try
             {
                 int Time = ST.TimeCloseRegisterUnit().ToList()[0].Value;
